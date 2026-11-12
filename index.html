@@ -313,7 +313,7 @@
 
   <script>
 
-    const opportunities = [
+    let opportunities= [
 
       {
         title: "Global Scholarship Search",
@@ -381,7 +381,81 @@
 
     ];
 
-    function showOpportunities() {
+ 
+const publishedCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6X1KjNwmGhNFVpkAEeQIf3jxOpDeXML4e1tftya-0AGtkgcwIQtVy0WElZTSwIH3qIapUVoFBKmAv/pub?gid=1040139166&single=true&output=csv";
+
+function parseCSV(csv) {
+  const rows = [];
+  let row = [];
+  let field = "";
+  let quoted = false;
+
+  for (let i = 0; i < csv.length; i++) {
+    const c = csv[i];
+
+    if (quoted) {
+      if (c === '"' && csv[i + 1] === '"') {
+        field += '"';
+        i++;
+      } else if (c === '"') {
+        quoted = false;
+      } else {
+        field += c;
+      }
+    } else if (c === '"') {
+      quoted = true;
+    } else if (c === ",") {
+      row.push(field);
+      field = "";
+    } else if (c === "\n") {
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = "";
+    } else if (c !== "\r") {
+      field += c;
+    }
+  }
+
+  if (field || row.length) {
+    row.push(field);
+    rows.push(row);
+  }
+
+  return rows;
+}
+
+async function loadPublishedOpportunities() {
+  try {
+    const response = await fetch(publishedCSV);
+    if (!response.ok) throw new Error("Could not load spreadsheet");
+
+    const csv = await response.text();
+    const rows = parseCSV(csv);
+    const headers = rows[0].map(h => h.trim().toLowerCase());
+
+    const get = (row, name) =>
+      row[headers.indexOf(name)] || "";
+
+    opportunities = rows.slice(1)
+      .filter(row => get(row, "title").trim())
+      .map(row => ({
+        title: get(row, "title"),
+        category: get(row, "category"),
+        country: get(row, "country"),
+        description: get(row, "description"),
+        link: get(row, "official link")
+      }));
+
+    showOpportunities();
+  } catch (error) {
+    console.error("Opportunity loading error:", error);
+    showOpportunities();
+  }
+}
+
+loadPublishedOpportunities();
+
 
       const term = document
         .getElementById("search")
