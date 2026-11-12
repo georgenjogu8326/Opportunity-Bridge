@@ -1,119 +1,474 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Opportunity Bridge | Global Opportunities</title>
-<meta name="description" content="Discover scholarships, grants, internships, jobs and free online courses from around the world.">
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172b4d}
-header{background:#123b67;color:white;padding:25px 7%}
-nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
-.logo{font-size:25px;font-weight:bold}
-.hero{text-align:center;padding:65px 15px;background:#e5effb}
-.hero h1{font-size:38px;margin:0 0 15px}
-.hero p{font-size:17px;color:#42566f}
-.search{display:flex;max-width:650px;margin:25px auto;gap:10px}
-input,select{padding:14px;border:1px solid #d1d9e6;border-radius:8px;font-size:15px}
-.search input{flex:1;min-width:0}
-button{background:#1769aa;color:white;border:0;padding:13px 20px;border-radius:8px;cursor:pointer}
-button:hover{background:#0e4d82}
-main{max-width:1100px;margin:35px auto;padding:0 18px}
-.filters{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:25px}
-.filters select{background:white;flex:1;min-width:180px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-.card{background:white;padding:22px;border-radius:12px;box-shadow:0 2px 10px #e1e6ef}
-.card h3{margin-top:8px}
-.tag{display:inline-block;background:#e5effb;color:#14558b;padding:6px 10px;border-radius:20px;font-size:12px}
-.card p{color:#53647a;line-height:1.5}
-.card a{display:inline-block;text-decoration:none;background:#1769aa;color:white;padding:11px 15px;border-radius:7px;margin-top:8px}
-.empty{background:white;padding:25px;border-radius:10px;text-align:center;grid-column:1/-1}
-footer{text-align:center;padding:30px;background:#123b67;color:white;margin-top:60px}
-@media(max-width:600px){.hero h1{font-size:29px}.search{flex-direction:column}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Opportunity Bridge | Global Opportunities</title>
+
+  <meta name="description" content="Discover scholarships, grants, internships, jobs and free online courses from around the world. Find your next opportunity with Opportunity Bridge.">
+
+  <meta name="keywords" content="global scholarships, grants, internships, free online courses, jobs, opportunities">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172b4d;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #123b67;
+      color: white;
+      padding: 20px 7%;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 75px 20px;
+      background: linear-gradient(135deg, #e4efff, #f5f8ff);
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      margin-bottom: 12px;
+      color: #123b67;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: #52657d;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .search {
+      display: flex;
+      max-width: 680px;
+      margin: 30px auto 0;
+      gap: 10px;
+    }
+
+    .search input {
+      flex: 1;
+      min-width: 0;
+    }
+
+    input, select {
+      padding: 14px;
+      border: 1px solid #d3dce8;
+      border-radius: 8px;
+      font-size: 15px;
+      background: white;
+    }
+
+    button {
+      background: #1769aa;
+      color: white;
+      border: none;
+      padding: 14px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #0e4d82;
+    }
+
+    main {
+      max-width: 1150px;
+      margin: 45px auto;
+      padding: 0 20px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      font-size: 27px;
+      color: #123b67;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .filters select {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .results-count {
+      color: #64748b;
+      margin-bottom: 18px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 23px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(20, 50, 90, 0.07);
+      border: 1px solid #e8edf4;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e5effb;
+      color: #14558b;
+      padding: 5px 11px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .card h3 {
+      margin: 13px 0 8px;
+      font-size: 19px;
+      color: #123b67;
+    }
+
+    .card p {
+      color: #53647a;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .card a {
+      display: inline-block;
+      text-decoration: none;
+      background: #1769aa;
+      color: white;
+      padding: 11px 16px;
+      border-radius: 7px;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .card a:hover {
+      background: #0e4d82;
+    }
+
+    .empty {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    .notice {
+      margin-top: 30px;
+      padding: 18px;
+      background: #eaf2fc;
+      border-radius: 10px;
+      color: #36516f;
+      font-size: 14px;
+    }
+
+    footer {
+      background: #123b67;
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+      margin-top: 60px;
+    }
+
+    footer a {
+      color: white;
+      margin: 0 8px;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 55px 15px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .search {
+        flex-direction: column;
+      }
+
+      .search button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-<nav>
-<div class="logo">🌍 Opportunity Bridge</div>
-<div>Discover opportunities. Unlock your future.</div>
-</nav>
-</header>
 
-<section class="hero">
-<h1>Find Your Next Opportunity</h1>
-<p>Explore scholarships, grants, internships and free courses worldwide.</p>
-<div class="search">
-<input id="search" type="search" placeholder="Search opportunities...">
-<button onclick="showOpportunities()">Search</button>
-</div>
-</section>
+  <header>
+    <nav>
+      <div class="logo">🌍 Opportunity Bridge</div>
+      <div>Discover opportunities. Unlock your future.</div>
+    </nav>
+  </header>
 
-<main>
-<h2>Explore Opportunities</h2>
-<div class="filters">
-<select id="category" onchange="showOpportunities()">
-<option value="">All categories</option>
-<option>Scholarship</option>
-<option>Grant</option>
-<option>Internship</option>
-<option>Free Course</option>
-<option>Job</option>
-</select>
-<select id="country" onchange="showOpportunities()">
-<option value="">All countries</option>
-<option>Global</option>
-<option>United States</option>
-<option>United Kingdom</option>
-<option>Kenya</option>
-<option>Canada</option>
-</select>
-</div>
-<div id="results" class="cards"></div>
-</main>
+  <section class="hero">
+    <h1>Find Your Next Opportunity</h1>
 
-<footer>
-<p>© 2026 Opportunity Bridge. Discover opportunities. Unlock your future.</p>
-</footer>
+    <p>
+      Discover scholarships, grants, internships, jobs and free courses
+      from around the world.
+    </p>
 
-<script>
-const opportunities = [
-{title:"Explore Global Scholarships",category:"Scholarship",country:"Global",description:"Discover educational funding opportunities around the world.",link:"https://www.scholarshipportal.com/"},
-{title:"World Bank Scholarships",category:"Scholarship",country:"Global",description:"Explore scholarship information and education opportunities.",link:"https://www.worldbank.org/en/programs/scholarships"},
-{title:"Google Free Courses",category:"Free Course",country:"Global",description:"Develop digital and professional skills through online learning.",link:"https://grow.google/"},
-{title:"UN Careers and Internships",category:"Internship",country:"Global",description:"Explore career opportunities and internships with the United Nations.",link:"https://careers.un.org/"},
-{title:"Government of Canada Scholarships",category:"Scholarship",country:"Canada",description:"Find information about scholarships for international students.",link:"https://www.educanada.ca/scholarships-bourses/index.aspx?lang=eng"},
-{title:"UK Government Scholarships",category:"Scholarship",country:"United Kingdom",description:"Explore UK government scholarship information.",link:"https://www.chevening.org/"},
-{title:"USA Fulbright Program",category:"Scholarship",country:"United States",description:"Explore international educational exchange opportunities.",link:"https://fulbrightprogram.org/"}
-{title:"Kenya Youth Opportunities",category:"Job",country:"Kenya",description:"Explore official Kenyan youth programmes, digital work, training and enterprise opportunities.",link:"https://www.labourmarket.go.ke/youth-initiatives/"},
+    <div class="search">
+      <input
+        id="search"
+        type="search"
+        placeholder="Search scholarships, jobs, courses..."
+        aria-label="Search opportunities"
+      >
 
-function showOpportunities(){
-const term=document.getElementById("search").value.toLowerCase();
-const category=document.getElementById("category").value;
-const country=document.getElementById("country").value;
-const filtered=opportunities.filter(item=>
-(item.title+" "+item.description+" "+item.category+" "+item.country).toLowerCase().includes(term)&&
-(!category||item.category===category)&&
-(!country||item.country===country||item.country==="Global")
-);
-const results=document.getElementById("results");
-if(!filtered.length){
-results.innerHTML='<div class="empty">No matching opportunities found. Try another search.</div>';
-return;
-}
-results.innerHTML=filtered.map(item=>`
-<article class="card">
-<span class="tag">${item.category}</span>
-<h3>${item.title}</h3>
-<p><strong>Location:</strong> ${item.country}</p>
-<p>${item.description}</p>
-<a href="${item.link}" target="_blank" rel="noopener noreferrer">Visit official website ↗</a>
-</article>`).join("");
-}
-showOpportunities();
-</script>
+      <button onclick="showOpportunities()">Search</button>
+    </div>
+  </section>
+
+  <main>
+
+    <div class="section-heading">
+      <h2>Explore Opportunities</h2>
+      <p>Find opportunities that can help you build your future.</p>
+    </div>
+
+    <div class="filters">
+
+      <select id="category" onchange="showOpportunities()">
+        <option value="">All Categories</option>
+        <option value="Scholarship">Scholarships</option>
+        <option value="Grant">Grants</option>
+        <option value="Internship">Internships</option>
+        <option value="Free Course">Free Courses</option>
+        <option value="Job">Jobs</option>
+      </select>
+
+      <select id="country" onchange="showOpportunities()">
+        <option value="">All Countries</option>
+        <option value="Global">Global</option>
+        <option value="Kenya">Kenya</option>
+        <option value="United States">United States</option>
+        <option value="United Kingdom">United Kingdom</option>
+        <option value="Canada">Canada</option>
+      </select>
+
+    </div>
+
+    <p id="resultsCount" class="results-count"></p>
+
+    <div id="results" class="cards"></div>
+
+    <div class="notice">
+      <strong>Important:</strong>
+      Opportunity Bridge shares links to external opportunity providers.
+      Always check eligibility, deadlines, application requirements and
+      fees on the official provider's website before applying.
+    </div>
+
+  </main>
+
+  <footer>
+    <h3>Opportunity Bridge</h3>
+    <p>Discover opportunities. Unlock your future.</p>
+    <p>© 2026 Opportunity Bridge. All rights reserved.</p>
+  </footer>
+
+  <script>
+
+    const opportunities = [
+
+      {
+        title: "Global Scholarship Search",
+        category: "Scholarship",
+        country: "Global",
+        description: "Explore scholarships and funding opportunities for students worldwide.",
+        link: "https://www.scholarshipportal.com/"
+      },
+
+      {
+        title: "World Bank Scholarships",
+        category: "Scholarship",
+        country: "Global",
+        description: "Explore World Bank scholarship programmes and education funding.",
+        link: "https://www.worldbank.org/en/programs/scholarships"
+      },
+
+      {
+        title: "Google Free Learning Courses",
+        category: "Free Course",
+        country: "Global",
+        description: "Develop digital, career and professional skills through online learning.",
+        link: "https://grow.google/"
+      },
+
+      {
+        title: "United Nations Careers",
+        category: "Internship",
+        country: "Global",
+        description: "Explore United Nations careers and internship opportunities.",
+        link: "https://careers.un.org/"
+      },
+
+      {
+        title: "Canada International Scholarships",
+        category: "Scholarship",
+        country: "Canada",
+        description: "Find information about Canadian scholarships for international students.",
+        link: "https://www.educanada.ca/scholarships-bourses/index.aspx?lang=eng"
+      },
+
+      {
+        title: "Chevening Scholarships",
+        category: "Scholarship",
+        country: "United Kingdom",
+        description: "Explore UK government-funded international scholarship opportunities.",
+        link: "https://www.chevening.org/"
+      },
+
+      {
+        title: "Kenya Youth Opportunities",
+        category: "Job",
+        country: "Kenya",
+        description: "Explore Kenyan youth programmes, digital work, training and enterprise initiatives.",
+        link: "https://www.labourmarket.go.ke/youth-initiatives/"
+      },
+
+      {
+        title: "USA Fulbright Programme",
+        category: "Scholarship",
+        country: "United States",
+        description: "Explore international educational exchange and scholarship opportunities.",
+        link: "https://fulbrightprogram.org/"
+      }
+
+    ];
+
+    function showOpportunities() {
+
+      const term = document
+        .getElementById("search")
+        .value
+        .trim()
+        .toLowerCase();
+
+      const category = document.getElementById("category").value;
+
+      const country = document.getElementById("country").value;
+
+      const filtered = opportunities.filter(item => {
+
+        const searchableText = (
+          item.title + " " +
+          item.description + " " +
+          item.category + " " +
+          item.country
+        ).toLowerCase();
+
+        const matchesSearch = searchableText.includes(term);
+
+        const matchesCategory =
+          !category || item.category === category;
+
+        const matchesCountry =
+          !country ||
+          item.country === country ||
+          item.country === "Global";
+
+        return matchesSearch && matchesCategory && matchesCountry;
+
+      });
+
+      const results = document.getElementById("results");
+
+      const count = document.getElementById("resultsCount");
+
+      count.textContent =
+        filtered.length + " opportunities found";
+
+      if (filtered.length === 0) {
+
+        results.innerHTML =
+          '<div class="empty">' +
+          '<h3>No opportunities found</h3>' +
+          '<p>Try another keyword or change your filters.</p>' +
+          '</div>';
+
+        return;
+
+      }
+
+      results.innerHTML = filtered.map(item => `
+
+        <article class="card">
+
+          <span class="tag">${item.category}</span>
+
+          <h3>${item.title}</h3>
+
+          <p><strong>Location:</strong> ${item.country}</p>
+
+          <p>${item.description}</p>
+
+          <a
+            href="${item.link}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Visit Official Website ↗
+          </a>
+
+        </article>
+
+      `).join("");
+
+    }
+
+    document
+      .getElementById("search")
+      .addEventListener("input", showOpportunities);
+
+    showOpportunities();
+
+  </script>
+
 </body>
 </html>
+
+
+
+
+
