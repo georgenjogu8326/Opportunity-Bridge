@@ -1,130 +1,248 @@
 
 <!DOCTYPE html>
-<html lang="en"> 
-<section id="china-scholarship" style="padding:40px 20px;max-width:1000px;margin:auto;">
-  <div style="border:1px solid #ddd;padding:22px;border-radius:12px;">
-    <h2>🇨🇳 Chinese Government Scholarships 2027/2028</h2>
-    <p><strong>Country:</strong> China</p>
-    <p><strong>Scholarships available:</strong> 15 for eligible Kenyan students</p>
-    <p><strong>Study levels:</strong> Undergraduate, Master's and PhD</p>
-    <p><strong>Deadline:</strong> 18 November 2026, 5:00 PM</p>
-    <p><strong>Eligibility:</strong> Kenyan applicants who meet the academic, age and university admission requirements for their chosen study level.</p>
-    <p><strong>Application process:</strong> Apply through the China Scholarship Council portal and follow the Kenya Ministry of Education's nomination and document-submission requirements.</p>
-    <p><strong>Important:</strong> Undergraduate applicants must take the required CSCA examination. Master's and PhD applicants have additional document requirements.</p>
-    <a href="https://www.education.go.ke/index.php/scholarships-0" target="_blank" rel="noopener noreferrer">Kenya Ministry of Education – Applications</a>
-    <br><br>
-    <a href="https://www.campuschina.org/" target="_blank" rel="noopener noreferrer">China Scholarship Council – Official Portal</a>
-    <br><br>
-    <a href="https://ke.china-embassy.gov.cn/eng/zxyw/202611/t20261109_12055839.htm" target="_blank" rel="noopener noreferrer">Read Official Embassy Announcement</a>
-  </div>
-</section>
-
-<head> <meta name="description" content="Discover global scholarships, grants, job opportunities, internships and free online courses. Find opportunities to learn, grow and build your future.">
-
-<meta name="keywords" content="global scholarships, international grants, remote jobs, internships, free online courses, global opportunities">
-
-<meta name="robots" content="index, follow">
-
-<meta property="og:title" content="Opportunity Bridge – Global Opportunities">
-
-<meta property="og:description" content="Discover scholarships, grants, jobs, internships and free courses around the world.">
-
-<meta property="og:url" content="https://opportunity-bridge.pages.dev/">
-
-<meta property="og:type" content="website">
-
-<title>Opportunity Bridge – Global Scholarships, Grants, Jobs & Free Courses</title>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Opportunity Bridge | Scholarships, Grants, Jobs and Free Courses</title>
+  <title>Opportunity Bridge | Scholarships, Grants, Jobs & Free Courses</title>
 
-  <meta name="description" content="Discover scholarships, grants, internships, jobs and free online courses from Kenya and around the world.">
+  <meta name="description" content="Discover global scholarships, grants, internships, jobs and free online courses. Find opportunities to learn, grow and build your future.">
 
-  <meta name="keywords" content="global scholarships, grants, internships, jobs, free courses, Kenya opportunities, international opportunities">
+  <meta name="keywords" content="global scholarships, international scholarships, grants, internships, remote jobs, free online courses, Kenya opportunities">
 
   <meta name="author" content="Opportunity Bridge">
   <meta name="robots" content="index, follow">
 
+  <link rel="canonical" href="https://opportunity-bridge.pages.dev/">
+
+  <meta property="og:title" content="Opportunity Bridge – Discover Global Opportunities">
+  <meta property="og:description" content="Find scholarships, grants, internships, jobs and free courses around the world.">
+  <meta property="og:url" content="https://opportunity-bridge.pages.dev/">
+  <meta property="og:type" content="website">
+
+  <meta name="theme-color" content="#102e55">
+
   <style>
     * {
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: #f5f7fb;
       color: #172b4d;
+      line-height: 1.6;
     }
 
+    a {
+      color: #1769aa;
+    }
+
+    /* HEADER */
+
     header {
-      background: #123b67;
+      background: #102e55;
       color: white;
-      padding: 22px 7%;
+      padding: 18px 7%;
     }
 
     nav {
+      max-width: 1200px;
+      margin: auto;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 18px;
     }
 
     .logo {
-      font-size: 25px;
+      font-size: 24px;
       font-weight: bold;
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: #f4c45e;
     }
 
     .submit-button {
       display: inline-block;
-      background: #f4b942;
-      color: #172b4d;
-      text-decoration: none;
+      background: #f4bd4f;
+      color: #102e55;
       padding: 12px 18px;
       border-radius: 8px;
+      text-decoration: none;
       font-weight: bold;
     }
 
     .submit-button:hover {
-      background: #ffd36d;
+      background: #ffd77c;
     }
 
+    /* HERO COVER */
+
     .hero {
-      text-align: center;
-      padding: 65px 15px;
-      background: #e5effb;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(76, 154, 224, 0.35), transparent 30%),
+        linear-gradient(120deg, #102e55, #145b91 65%, #1874a9);
+      color: white;
+      padding: 85px 7% 90px;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 45px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 30px;
+      padding: 7px 15px;
+      font-size: 13px;
+      margin-bottom: 18px;
     }
 
     .hero h1 {
-      font-size: 38px;
-      margin: 0 0 15px;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.12;
+      margin: 0 0 20px;
+      max-width: 680px;
     }
 
-    .hero p {
+    .hero h1 span {
+      color: #ffd16b;
+    }
+
+    .hero-text {
+      max-width: 600px;
+      color: #e2edfa;
       font-size: 17px;
-      color: #42566f;
-      line-height: 1.6;
+      margin-bottom: 25px;
     }
 
-    .search {
+    .hero-actions {
       display: flex;
-      max-width: 650px;
-      margin: 25px auto;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero-actions a {
+      text-decoration: none;
+      font-weight: bold;
+      padding: 13px 20px;
+      border-radius: 8px;
+    }
+
+    .hero-primary {
+      background: #f4bd4f;
+      color: #102e55;
+    }
+
+    .hero-secondary {
+      border: 1px solid rgba(255,255,255,0.6);
+      color: white;
+    }
+
+    .hero-visual {
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .globe {
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 105px;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.3);
+      box-shadow: 0 0 70px rgba(255,255,255,0.12);
+    }
+
+    .floating-card {
+      position: absolute;
+      background: white;
+      color: #173b63;
+      padding: 13px 17px;
+      border-radius: 10px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .floating-one {
+      top: 25px;
+      left: 0;
+    }
+
+    .floating-two {
+      right: 0;
+      top: 95px;
+    }
+
+    .floating-three {
+      bottom: 20px;
+      left: 25px;
+    }
+
+    /* SEARCH */
+
+    .search-area {
+      max-width: 900px;
+      margin: -32px auto 35px;
+      padding: 0 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .search-box {
+      background: white;
+      padding: 18px;
+      border-radius: 13px;
+      box-shadow: 0 8px 30px rgba(20,50,80,0.13);
+      display: flex;
       gap: 10px;
     }
 
-    input, select {
-      padding: 14px;
-      border: 1px solid #d1d9e6;
-      border-radius: 8px;
-      font-size: 15px;
-    }
-
-    .search input {
+    .search-box input {
       flex: 1;
       min-width: 0;
+      padding: 14px;
+      border: 1px solid #d5dfeb;
+      border-radius: 8px;
+      font-size: 15px;
     }
 
     button {
@@ -141,29 +259,50 @@
       background: #0e4d82;
     }
 
+    /* MAIN CONTENT */
+
     main {
-      max-width: 1100px;
+      max-width: 1150px;
       margin: 35px auto;
-      padding: 0 18px;
+      padding: 0 20px;
     }
 
-    .section-intro {
-      margin-bottom: 20px;
-      line-height: 1.6;
-      color: #53647a;
+    .section-heading {
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      font-size: 29px;
+      margin-bottom: 5px;
+      color: #123b67;
+    }
+
+    .section-heading p {
+      color: #617187;
+      margin-top: 0;
     }
 
     .filters {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     .filters select {
       background: white;
       flex: 1;
       min-width: 180px;
+      padding: 13px;
+      border: 1px solid #d5dfeb;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    #loadStatus {
+      color: #617187;
+      font-size: 13px;
+      margin: 12px 0;
     }
 
     .cards {
@@ -176,9 +315,10 @@
       background: white;
       padding: 22px;
       border-radius: 12px;
-      box-shadow: 0 2px 10px #e1e6ef;
+      box-shadow: 0 3px 13px rgba(20,50,80,0.07);
       display: flex;
       flex-direction: column;
+      border: 1px solid #e8edf4;
     }
 
     .card h3 {
@@ -206,7 +346,8 @@
       color: #42566f;
     }
 
-    .card a {
+    .card a,
+    .opportunity-card a {
       display: inline-block;
       text-align: center;
       text-decoration: none;
@@ -217,7 +358,8 @@
       margin-top: auto;
     }
 
-    .card a:hover {
+    .card a:hover,
+    .opportunity-card a:hover {
       background: #0e4d82;
     }
 
@@ -229,11 +371,124 @@
       grid-column: 1 / -1;
     }
 
+    /* SCHOLARSHIPS */
+
+    .scholarship-section {
+      margin-top: 65px;
+    }
+
+    .scholarship-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 20px;
+    }
+
+    .scholarship-card {
+      background: white;
+      padding: 23px;
+      border-radius: 12px;
+      border: 1px solid #e3eaf2;
+      box-shadow: 0 3px 13px rgba(20,50,80,0.06);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scholarship-card h3 {
+      color: #123b67;
+      margin-top: 10px;
+    }
+
+    .scholarship-card p {
+      color: #53647a;
+      font-size: 14px;
+    }
+
+    .scholarship-card a {
+      display: inline-block;
+      background: #1769aa;
+      color: white;
+      padding: 11px 14px;
+      text-align: center;
+      border-radius: 7px;
+      text-decoration: none;
+      margin-top: auto;
+    }
+
+    .scholarship-card a:hover {
+      background: #0e4d82;
+    }
+
+    .status-label {
+      display: inline-block;
+      color: #17613c;
+      background: #e5f5eb;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      align-self: flex-start;
+    }
+
+    .warning-label {
+      color: #8a4a08;
+      background: #fff1d8;
+    }
+
+    /* OTHER SECTIONS */
+
+    .content-section {
+      margin-top: 55px;
+    }
+
+    .content-panel {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 3px 13px rgba(20,50,80,0.06);
+    }
+
+    .content-panel h2 {
+      color: #123b67;
+    }
+
+    .content-panel p {
+      color: #53647a;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .opportunity-card {
+      background: #f8fafd;
+      border: 1px solid #e5ebf3;
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .opportunity-card h3 {
+      color: #123b67;
+      margin-top: 0;
+    }
+
+    .opportunity-card p {
+      font-size: 14px;
+    }
+
+    .disclosure {
+      font-size: 12px;
+      color: #65748a;
+    }
+
     .notice {
       background: #fff8e7;
       border-left: 4px solid #e5ad32;
-      padding: 15px;
-      margin-top: 25px;
+      padding: 16px;
+      margin-top: 35px;
       border-radius: 6px;
       color: #59471e;
       line-height: 1.6;
@@ -241,11 +496,11 @@
 
     .submit-section {
       background: white;
-      padding: 30px 20px;
+      padding: 35px 22px;
       text-align: center;
       border-radius: 12px;
       margin-top: 45px;
-      box-shadow: 0 2px 10px #e1e6ef;
+      box-shadow: 0 3px 13px rgba(20,50,80,0.06);
     }
 
     .submit-section p {
@@ -253,37 +508,98 @@
       line-height: 1.6;
     }
 
-    #loadStatus {
-      color: #53647a;
-      font-size: 13px;
-      margin: 15px 0;
-    }
+    /* FOOTER */
 
     footer {
       text-align: center;
-      padding: 30px;
-      background: #123b67;
+      padding: 35px 20px;
+      background: #102e55;
       color: white;
-      margin-top: 60px;
-      line-height: 1.6;
+      margin-top: 65px;
+      line-height: 1.8;
     }
 
     footer a {
-      color: #f4b942;
+      color: #f4bd4f;
+      text-decoration: none;
+      margin: 0 7px;
     }
 
-    @media(max-width: 600px) {
-      .hero h1 {
-        font-size: 29px;
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* MOBILE */
+
+    @media(max-width: 750px) {
+      .hero {
+        padding: 60px 7%;
       }
 
-      .search {
-        flex-direction: column;
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-text {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        min-height: 260px;
+      }
+
+      .globe {
+        width: 190px;
+        height: 190px;
+        font-size: 85px;
+      }
+
+      .floating-one {
+        left: 5%;
+      }
+
+      .floating-two {
+        right: 2%;
+      }
+
+      .floating-three {
+        left: 5%;
       }
 
       nav {
-        flex-direction: column;
         align-items: flex-start;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+    }
+
+    @media(max-width: 500px) {
+      .hero h1 {
+        font-size: 35px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-box button {
+        width: 100%;
+      }
+
+      .content-panel {
+        padding: 22px;
+      }
+
+      .logo {
+        font-size: 21px;
       }
     }
   </style>
@@ -291,677 +607,803 @@
 
 <body>
 
-<header>
-  <nav> <a href="#advertise">Advertise</a> <a href="#career-support">Career Support</a>
-    <div class="logo">🌍 Opportunity Bridge</div>
+  <!-- HEADER -->
 
-    <a
-      class="submit-button"
-      href="https://forms.gle/WHiHb7F9pwdY1zmi7"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Submit an Opportunity
-    </a>
-  </nav>
-</header>
+  <header>
+    <nav>
+      <a href="#" class="logo">🌍 Opportunity Bridge</a>
 
-<section class="hero">
-  <h1>Find Your Next Opportunity</h1>
+      <div class="nav-links">
+        <a href="#opportunities">Opportunities</a>
+        <a href="#scholarships">Scholarships</a>
+        <a href="#career-support">Career Support</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
 
-  <p>
-    Discover scholarships, grants, internships, jobs and free courses
-    from Kenya and around the world.
-  </p>
+      <a
+        class="submit-button"
+        href="https://forms.gle/WHiHb7F9pwdY1zmi7"
+        target="_blank"
+        rel="noopener noreferrer">
+        Submit an Opportunity
+      </a>
+    </nav>
+  </header>
 
-  <div class="search">
-    <input
-      id="search"
-      type="search"
-      placeholder="Search scholarships, jobs, courses..."
-      aria-label="Search opportunities"
-    >
+  <!-- ATTRACTIVE WEBSITE COVER -->
 
-    <button id="searchButton" type="button">Search</button>
-  </div>
-</section>
+  <section class="hero">
+    <div class="hero-inner">
 
-<main>
-  <h2>Explore Opportunities</h2>
+      <div>
+        <span class="hero-label">🌍 Your future starts here</span>
 
-  <p class="section-intro">
-    Find opportunities that can help you study, develop new skills,
-    start your career or grow your future.
-  </p>
+        <h1>
+          Discover Opportunities.
+          <span>Build Your Future.</span>
+        </h1>
 
-  <div class="filters">
-    <select id="category" aria-label="Filter by category">
-      <option value="">All categories</option>
-      <option value="Scholarship">Scholarship</option>
-      <option value="Grant">Grant</option>
-      <option value="Internship">Internship</option>
-      <option value="Free Course">Free Course</option>
-      <option value="Job">Job</option>
-      <option value="Competition">Competition</option>
-    </select>
+        <p class="hero-text">
+          Your gateway to global scholarships, grants, internships,
+          jobs and free online courses. Find opportunities that
+          can help you learn, grow and move forward.
+        </p>
 
-    <select id="country" aria-label="Filter by country">
-      <option value="">All countries</option>
-      <option value="Global">Global</option>
-      <option value="Kenya">Kenya</option>
-      <option value="United States">United States</option>
-      <option value="United Kingdom">United Kingdom</option>
-      <option value="Canada">Canada</option>
-    </select>
-  </div>
+        <div class="hero-actions">
+          <a href="#opportunities" class="hero-primary">
+            Explore Opportunities →
+          </a>
 
-  <p id="loadStatus" aria-live="polite">
-    Loading opportunities...
-  </p>
+          <a href="#scholarships" class="hero-secondary">
+            Find Scholarships
+          </a>
+        </div>
+      </div>
 
-  <div id="results" class="cards"></div>
+      <div class="hero-visual">
+        <div class="globe">🌍</div>
 
-<section id="about" class="submit-section"> 
-<section id="learning-guides">
-  <h2>Scholarship & Career Guides</h2>
+        <div class="floating-card floating-one">
+          🎓 Scholarships
+        </div>
 
-  <p>
-    Explore helpful guides to find opportunities,
-    prepare applications and improve your career.
-  </p>
+        <div class="floating-card floating-two">
+          💼 Jobs & Internships
+        </div>
 
-  <div class="opportunity-card">
-    <h3>How to Find Legitimate International Scholarships in 2026</h3>
+        <div class="floating-card floating-three">
+          📚 Free Courses
+        </div>
+      </div>
 
-    <p>
-      Learn where to find scholarships, check eligibility,
-      prepare documents and avoid misleading offers.
-    </p>
-
-    <a href="scholarship-guide.html">
-      Read the Complete Guide →
-    </a>
-  </div>
-</section>
-
-  <h2>About Opportunity Bridge</h2>
-
-  <p>
-    Opportunity Bridge is a global platform connecting people
-    with scholarships, grants, internships, jobs, competitions
-    and free online courses.
-  </p>
-
-  <p>
-    Our mission is to make opportunities easier to discover
-    and help people build a better future, regardless of where
-    they come from.
-  </p>
-
-  <p>
-    Our platform is free to use. We support its growth through
-    clearly identified partnerships, sponsored listings,
-    advertising and affiliate marketing.
-  </p>
-</section>
-
-<section id="career-support">
-  <h2>Career Support Resources</h2> <p style="font-size:13px; color:#666;">
-  Some links in this section are affiliate links.
-  We may earn a commission if you make a qualifying
-  purchase through them, at no extra cost to you.
-</p>
-  <p>
-    Looking for a job? Improve your job application
-    with professional career support services.
-  </p>
-
-  <div class="opportunity-card">
-     
-<div class="opportunity-card">
-  <h3>LinkedIn Profile Optimization</h3>
-
-  <p>
-    Improve your LinkedIn profile to present your
-    skills and experience professionally to recruiters.
-  </p>
-
-  <a
-    href="https://go.fiverr.com/visit/?bta=1173802&brand=fiverrmarketplace&landingPage=https%253A%252F%252Fwww.fiverr.com%252Fsearch%252Fgigs%253Fquery%253DLinkedIn%252520Profile%252520Optimization.%2526source%253Dtop-bar%2526ref_ctx_id%253D02b7087c1b8447549ad43e6dde0f097d%2526search_in%253Deverywhere%2526search-autocomplete-original-term%253Dlinkedin%252520profile%252520optimization."
-    target="_blank"
-    rel="nofollow sponsored noopener noreferrer">
-    Explore LinkedIn Profile Services
-  </a>
-
-  <p>
-    <small>
-      Disclosure: We may earn a commission if you make
-      a qualifying purchase through this link.
-    </small>
-  </p>
-</div>
-
-<div class="opportunity-card">
-  <h3>Professional Cover Letter Writing</h3>
-
-  <p>
-    Make a stronger first impression with a professional
-    cover letter tailored to your job application.
-  </p>
-
-  <a
-    href="https://go.fiverr.com/visit/?bta=1173802&brand=fiverrmarketplace&landingPage=https%253A%252F%252Fwww.fiverr.com%252Fsearch%252Fgigs%253Fquery%253DCover%252520Letter%252520Writing.%2526source%253Dtop-bar%2526ref_ctx_id%253Defbc7b03f657422a87b76cd02fec075e%2526search_in%253Deverywhere%2526search-autocomplete-original-term%253Dcover%252520letter%252520writing."
-    target="_blank"
-    rel="nofollow sponsored noopener noreferrer">
-    Explore Cover Letter Services
-  </a>
-
-  <p>
-    <small>
-      Disclosure: We may earn a commission if you make
-      a qualifying purchase through this link.
-    </small>
-  </p>
-</div> 
-<div class="opportunity-card">
-  <h3>Interview Preparation Services</h3>
-
-  <p>
-    Prepare for your next job interview with professional
-    coaching, practice questions and interview guidance.
-  </p>
-
-  <a
-    href="https://go.fiverr.com/visit/?bta=1173802&brand=fiverrmarketplace&landingPage=https%253A%252F%252Fwww.fiverr.com%252Fsearch%252Fgigs%253Fquery%253DInterview%252520Preparation%252520Services%2526source%253Dtop-bar%2526ref_ctx_id%253D7a46d09e3fa04517b310c64dcbe1c0ae%2526search_in%253Deverywhere%2526search-autocomplete-original-term%253Dinterview%252520preparation%252520services"
-    target="_blank"
-    rel="nofollow sponsored noopener noreferrer">
-    Explore Interview Preparation Services
-  </a>
-
-  <p>
-    <small>
-      Disclosure: We may earn a commission if you make
-      a qualifying purchase through this link.
-    </small>
-  </p>
-</div>
-
-
-    <p><h3>Professional Resume Writing</h3> 
-      Find freelance professionals who can help you
-      create or improve your CV and resume.
-    </p>
-
-    <a
-      href="https://go.fiverr.com/visit/?bta=1173802&brand=fiverrmarketplace&landingPage=https%253A%252F%252Fwww.fiverr.com%252Fsearch%252Fgigs%253Fquery%253D%252520Resume%252520Writing%2526source%253Dtop-bar%2526ref_ctx_id%253Dd0aa1e27b15d4e72ae9f795546189a1b%2526search_in%253Deverywhere%2526search-autocomplete-original-term%253D%252520resume%252520writing"
-      target="_blank"
-      rel="nofollow sponsored noopener noreferrer">
-      Explore Resume Writing Services
-    </a>
-
-    <p><small>
-      Disclosure: We may earn a commission if you
-      make a qualifying purchase through this link.
-    </small></p>
-  </div>
-</section>
-
-  <div class="notice">
-    <strong>Important:</strong> Always visit the official website
-    to confirm eligibility, application deadlines, requirements
-    and whether an opportunity is still open. Opportunity Bridge
-    does not guarantee selection or funding.
-  </div>
-
-  <section class="submit-section">
-    <h2>Have an Opportunity to Share?</h2>
-
-    <p>
-      Organisations, schools, companies and opportunity providers
-      can submit scholarships, grants, internships, jobs and free
-      courses for review.
-    </p>
-
-    <a
-      class="submit-button"
-      href="https://forms.gle/WHiHb7F9pwdY1zmi7"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Submit an Opportunity
-    </a>
+    </div>
   </section>
-</main>
 
-<section id="contact" class="submit-section">
-  <h2>Contact Opportunity Bridge</h2>
+  <!-- SEARCH BAR -->
 
-  <p>
-    Have a question, partnership proposal, advertising inquiry
-    or feedback? We would love to hear from you.
-  </p>
+  <div class="search-area">
+    <div class="search-box">
+      <input
+        id="search"
+        type="search"
+        placeholder="Search scholarships, jobs, courses..."
+        aria-label="Search opportunities">
 
-  <p>
-    Email us:
-    <a href="mailto:georgenjogu673@gmail.com">
-      Contact Opportunity Bridge
-    </a>
-  </p>
+      <button id="searchButton" type="button">
+        Search
+      </button>
+    </div>
+  </div>
 
-  <p>
-    Organisations can also submit opportunities for review
-    through our submission form.
-  </p>
+  <main>
 
-  <a
-    class="submit-button"
-    href="https://forms.gle/WHiHb7F9pwdY1zmi7"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Submit an Opportunity
-  </a>
-</section> 
-<section id="advertise" class="advertise-section">
-  <h2>Advertise With Opportunity Bridge</h2>
+    <!-- OPPORTUNITY LISTINGS -->
 
-  <p>
-    Are you an organisation, company or training provider?
-    Promote your scholarships, jobs, internships, grants and
-    training programmes to people around the world.
-  </p>
+    <section id="opportunities">
+      <div class="section-heading">
+        <h2>Explore Opportunities</h2>
+        <p>
+          Discover opportunities to study, develop skills,
+          start your career and build your future.
+        </p>
+      </div>
 
-  <p>
-    Partner with Opportunity Bridge and help more people
-    discover your opportunities.
-  </p>
+      <div class="filters">
+        <select id="category" aria-label="Filter by category">
+          <option value="">All categories</option>
+          <option value="Scholarship">Scholarship</option>
+          <option value="Grant">Grant</option>
+          <option value="Internship">Internship</option>
+          <option value="Free Course">Free Course</option>
+          <option value="Job">Job</option>
+          <option value="Competition">Competition</option>
+        </select>
 
-  <a
-    href="https://forms.gle/yD8N5q5LvPz44RweA"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="btn"
-  >
-    Advertise With Us
-  </a>
-</section>
+        <select id="country" aria-label="Filter by country">
+          <option value="">All countries</option>
+          <option value="Global">Global</option>
+          <option value="Kenya">Kenya</option>
+          <option value="United States">United States</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Canada">Canada</option>
+        </select>
+      </div>
 
+      <p id="loadStatus" aria-live="polite">
+        Loading opportunities...
+      </p>
 
-<footer>
-  <p>
-    © 2026 Opportunity Bridge. Discover opportunities. Unlock your future.
-  </p>
-<p>
-  <a href="privacy.html">Privacy Policy</a> <p>
-  <a href="terms.html">Terms & Conditions</a> <p>
-  <a href="disclaimer.html">Disclaimer</a>
-</p>
-</p>
-</p>
-  <p>
-    Helping people discover opportunities around the world.
-  </p>
-</footer>
+      <div id="results" class="cards"></div>
+    </section>
 
-<script>
-  // YOUR ORIGINAL EIGHT OPPORTUNITIES
-  // These remain on the website even when Google Sheets is connected.
+    <!-- FEATURED SCHOLARSHIPS -->
 
-  const starterOpportunities = [
-    {
-      title: "Explore Global Scholarships",
-      category: "Scholarship",
-      country: "Global",
-      description: "Discover educational funding opportunities around the world.",
-      link: "https://www.scholarshipportal.com/"
-    },
-    {
-      title: "World Bank Scholarships",
-      category: "Scholarship",
-      country: "Global",
-      description: "Explore scholarship information and education opportunities.",
-      link: "https://www.worldbank.org/en/programs/scholarships"
-    },
-    {
-      title: "Google Free Courses",
-      category: "Free Course",
-      country: "Global",
-      description: "Develop digital and professional skills through online learning.",
-      link: "https://grow.google/"
-    },
-    {
-      title: "UN Careers and Internships",
-      category: "Internship",
-      country: "Global",
-      description: "Explore career opportunities and internships with the United Nations.",
-      link: "https://careers.un.org/"
-    },
-    {
-      title: "Government of Canada Scholarships",
-      category: "Scholarship",
-      country: "Canada",
-      description: "Find information about scholarships for international students.",
-      link: "https://www.educanada.ca/scholarships-bourses/index.aspx?lang=eng"
-    },
-    {
-      title: "UK Government Scholarships",
-      category: "Scholarship",
-      country: "United Kingdom",
-      description: "Explore UK scholarship information through the Chevening programme.",
-      link: "https://www.chevening.org/"
-    },
-    {
-      title: "Kenya Government Opportunities",
-      category: "Grant",
-      country: "Kenya",
-      description: "Explore youth initiatives and government employment information in Kenya.",
-      link: "https://www.labourmarket.go.ke/youth-initiatives/"
-    },
-    {
-      title: "USA Fulbright Program",
-      category: "Scholarship",
-      country: "United States",
-      description: "Explore international educational exchange opportunities.",
-      link: "https://fulbrightprogram.org/"
-    }
-  ];
+    <section id="scholarships" class="scholarship-section">
+      <div class="section-heading">
+        <h2>🎓 Featured Scholarships for 2027</h2>
+        <p>
+          Explore education funding opportunities from
+          universities and scholarship programmes.
+        </p>
+      </div>
 
-  // PUBLIC GOOGLE SHEETS CSV LINK
-  const GOOGLE_SHEET_URL =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6X1KjNwmGhNFVpkAEeQIf3jxOpDeXML4e1tftya-0AGtkgcwIQtVy0WElZTSwIH3qIapUVoFBKmAv/pub?gid=1040139166&single=true&output=csv";
+      <div class="scholarship-grid">
 
-  // All opportunities displayed on the website.
-  let opportunities = [...starterOpportunities];
+        <article class="scholarship-card">
+          <span class="status-label warning-label">
+            Check deadline immediately
+          </span>
 
-  // Read CSV correctly, including fields containing commas.
-  function parseCSV(text) {
-    const rows = [];
-    let row = [];
-    let value = "";
-    let insideQuotes = false;
+          <h3>🇨🇳 Chinese Government Scholarships 2027/2028</h3>
 
-    for (let i = 0; i < text.length; i++) {
-      const char = text[i];
-      const next = text[i + 1];
+          <p><strong>Destination:</strong> China</p>
+          <p><strong>Study levels:</strong> Undergraduate, Master's and PhD</p>
+          <p><strong>Eligibility:</strong> Kenyan applicants who meet the relevant academic, age and admission requirements.</p>
+          <p><strong>Deadline:</strong> 18 November 2026, 5:00 PM Kenya time, according to the published announcement.</p>
 
-      if (char === '"' && insideQuotes && next === '"') {
-        value += '"';
-        i++;
-      } else if (char === '"') {
-        insideQuotes = !insideQuotes;
-      } else if (char === "," && !insideQuotes) {
-        row.push(value);
-        value = "";
-      } else if ((char === "\n" || char === "\r") && !insideQuotes) {
-        if (char === "\r" && next === "\n") {
+          <p>
+            Applicants must follow the Ministry of Education's
+            application and nomination instructions. Check all
+            requirements before applying.
+          </p>
+
+          <a href="https://www.education.go.ke/index.php/scholarships-0"
+             target="_blank"
+             rel="noopener noreferrer">
+            Kenya Ministry of Education
+          </a>
+
+          <p>
+            <a href="https://www.campuschina.org/"
+               target="_blank"
+               rel="noopener noreferrer">
+              China Scholarship Council Portal
+            </a>
+          </p>
+
+          <p>
+            <a href="https://ke.china-embassy.gov.cn/eng/zxyw/202611/t20261109_12055839.htm"
+               target="_blank"
+               rel="noopener noreferrer">
+              Embassy Announcement
+            </a>
+          </p>
+        </article>
+
+        <article class="scholarship-card">
+          <span class="status-label">
+            2027 applications
+          </span>
+
+          <h3>🇬🇧 Commonwealth Shared Scholarships</h3>
+
+          <p><strong>Destination:</strong> United Kingdom</p>
+          <p><strong>Study level:</strong> Master's degree</p>
+          <p><strong>Eligibility:</strong> Eligible Commonwealth-country applicants, including eligible Kenyan applicants.</p>
+          <p><strong>Deadline:</strong> 8 December 2026, 4:00 PM GMT, according to the published programme information.</p>
+
+          <p>
+            Scholarships support eligible students studying
+            selected Master's courses at participating UK universities.
+          </p>
+
+          <a href="https://cscuk.fcdo.gov.uk/scholarships/commonwealth-shared-scholarships/"
+             target="_blank"
+             rel="noopener noreferrer">
+            Official Scholarship Information
+          </a>
+        </article>
+
+        <article class="scholarship-card">
+          <span class="status-label">
+            Programme deadlines vary
+          </span>
+
+          <h3>🇪🇺 Erasmus Mundus Joint Master's</h3>
+
+          <p><strong>Destination:</strong> Europe</p>
+          <p><strong>Study level:</strong> Master's degree</p>
+          <p><strong>Eligibility:</strong> Students from around the world.</p>
+          <p><strong>Deadline:</strong> Varies by programme and university.</p>
+
+          <p>
+            Selected programmes offer scholarships that can
+            contribute to participation costs, travel and living expenses.
+          </p>
+
+          <a href="https://erasmus-plus.ec.europa.eu/opportunities/individuals/students/erasmus-mundus-joint-masters"
+             target="_blank"
+             rel="noopener noreferrer">
+            Official Erasmus Mundus Information
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- LEARNING GUIDES -->
+
+    <section id="learning-guides" class="content-section">
+      <div class="content-panel">
+        <h2>📚 Scholarship & Career Guides</h2>
+
+        <p>
+          Learn how to find legitimate opportunities, prepare
+          strong applications and improve your career.
+        </p>
+
+        <div class="resource-grid">
+          <article class="opportunity-card">
+            <h3>How to Find International Scholarships</h3>
+            <p>
+              Learn where to search, how to check eligibility
+              and how to prepare your application.
+            </p>
+            <a href="scholarship-guide.html">
+              Read the Complete Guide →
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAREER SUPPORT -->
+
+    <section id="career-support" class="content-section">
+      <div class="content-panel">
+        <h2>💼 Career Support Resources</h2>
+
+        <p>
+          Looking for a job? Explore professional services
+          that may help you improve your job applications.
+        </p>
+
+        <p class="disclosure">
+          Some links in this section are affiliate links.
+          We may earn a commission from qualifying purchases
+          at no extra cost to you.
+        </p>
+
+        <div class="resource-grid">
+
+          <article class="opportunity-card">
+            <h3>LinkedIn Profile Optimization</h3>
+            <p>
+              Improve your LinkedIn profile and present
+              your skills professionally to recruiters.
+            </p>
+            <a href="https://go.fiverr.com/visit/?bta=1173802&brand=fiverrmarketplace&landingPage=https%253A%252F%252Fwww.fiverr.com%252Fsearch%252Fgigs%253Fquery%253DLinkedIn%252520Profile%252520Optimization"
+               target="_blank"
+               rel="nofollow sponsored noopener noreferrer">
+              Explore LinkedIn Services
+            </a>
+          </article>
+
+          <article class="opportunity-card">
+            <h3>Professional Cover Letter Writing</h3>
+            <p>
+              Find professionals who can help you prepare
+              a cover letter for your job application.
+            </p>
+            <a href="https://go.fiverr.com/visit/?bta=1173802&brand=fiverrmarketplace&landingPage=https%253A%252F%252Fwww.fiverr.com%252Fsearch%252Fgigs%253Fquery%253DCover%252520Letter%252520Writing"
+               target="_blank"
+               rel="nofollow sponsored noopener noreferrer">
+              Explore Cover Letter Services
+            </a>
+          </article>
+
+          <article class="opportunity-card">
+            <h3>Interview Preparation</h3>
+            <p>
+              Explore interview coaching, practice questions
+              and professional interview guidance.
+            </p>
+            <a href="https://go.fiverr.com/visit/?bta=1173802&brand=fiverrmarketplace&landingPage=https%253A%252F%252Fwww.fiverr.com%252Fsearch%252Fgigs%253Fquery%253DInterview%252520Preparation%252520Services"
+               target="_blank"
+               rel="nofollow sponsored noopener noreferrer">
+              Explore Interview Services
+            </a>
+          </article>
+
+          <article class="opportunity-card">
+            <h3>Professional Resume Writing</h3>
+            <p>
+              Find freelance professionals who can help
+              you create or improve your CV and resume.
+            </p>
+            <a href="https://go.fiverr.com/visit/?bta=1173802&brand=fiverrmarketplace&landingPage=https%253A%252F%252Fwww.fiverr.com%252Fsearch%252Fgigs%253Fquery%253DResume%252520Writing"
+               target="_blank"
+               rel="nofollow sponsored noopener noreferrer">
+              Explore Resume Services
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+
+    <section id="about" class="content-section">
+      <div class="content-panel">
+        <h2>About Opportunity Bridge</h2>
+
+        <p>
+          Opportunity Bridge is a global platform connecting
+          people with scholarships, grants, internships, jobs,
+          competitions and free online courses.
+        </p>
+
+        <p>
+          Our mission is to make opportunities easier to discover
+          and help people build a better future, regardless of
+          where they come from.
+        </p>
+
+        <p>
+          Our platform is free to use. We support its growth
+          through clearly identified partnerships, sponsored
+          listings, advertising and affiliate marketing.
+        </p>
+      </div>
+    </section>
+
+    <!-- SUBMIT OPPORTUNITY -->
+
+    <section class="submit-section">
+      <h2>Have an Opportunity to Share?</h2>
+
+      <p>
+        Organisations, schools, companies and opportunity
+        providers can submit scholarships, grants, internships,
+        jobs and free courses for review.
+      </p>
+
+      <a class="submit-button"
+         href="https://forms.gle/WHiHb7F9pwdY1zmi7"
+         target="_blank"
+         rel="noopener noreferrer">
+        Submit an Opportunity
+      </a>
+    </section>
+
+    <!-- ADVERTISE -->
+
+    <section id="advertise" class="submit-section">
+      <h2>Advertise With Opportunity Bridge</h2>
+
+      <p>
+        Are you an organisation, company or training provider?
+        Promote your scholarships, jobs, internships, grants
+        and training programmes to people around the world.
+      </p>
+
+      <a class="submit-button"
+         href="https://forms.gle/yD8N5q5LvPz44RweA"
+         target="_blank"
+         rel="noopener noreferrer">
+        Advertise With Us
+      </a>
+    </section>
+
+    <!-- IMPORTANT NOTICE -->
+
+    <div class="notice">
+      <strong>Important:</strong> Always visit the official
+      website to confirm eligibility, application deadlines
+      and requirements. Opportunities may close or change.
+      Opportunity Bridge does not guarantee selection or funding.
+      Never pay an unknown person to secure a scholarship.
+    </div>
+
+    <!-- CONTACT -->
+
+    <section id="contact" class="submit-section">
+      <h2>Contact Opportunity Bridge</h2>
+
+      <p>
+        Have a question, partnership proposal, advertising
+        inquiry or feedback? We would love to hear from you.
+      </p>
+
+      <p>
+        Email:
+        <a href="mailto:georgenjogu673@gmail.com">
+          Contact Opportunity Bridge
+        </a>
+      </p>
+
+      <a class="submit-button"
+         href="https://forms.gle/WHiHb7F9pwdY1zmi7"
+         target="_blank"
+         rel="noopener noreferrer">
+        Submit an Opportunity
+      </a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <p>
+      <strong>🌍 Opportunity Bridge</strong>
+    </p>
+
+    <p>
+      Discover opportunities. Unlock your future.
+    </p>
+
+    <p>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+      <a href="disclaimer.html">Disclaimer</a>
+    </p>
+
+    <p>
+      © 2026 Opportunity Bridge. All rights reserved.
+    </p>
+  </footer>
+
+  <!-- OPPORTUNITY SEARCH AND GOOGLE SHEETS -->
+
+  <script>
+    const starterOpportunities = [
+      {
+        title: "Explore Global Scholarships",
+        category: "Scholarship",
+        country: "Global",
+        description: "Discover educational funding opportunities around the world.",
+        link: "https://www.scholarshipportal.com/"
+      },
+      {
+        title: "World Bank Scholarships",
+        category: "Scholarship",
+        country: "Global",
+        description: "Explore scholarship information and education opportunities.",
+        link: "https://www.worldbank.org/en/programs/scholarships"
+      },
+      {
+        title: "Google Free Courses",
+        category: "Free Course",
+        country: "Global",
+        description: "Develop digital and professional skills through online learning.",
+        link: "https://grow.google/"
+      },
+      {
+        title: "UN Careers and Internships",
+        category: "Internship",
+        country: "Global",
+        description: "Explore career opportunities and internships with the United Nations.",
+        link: "https://careers.un.org/"
+      },
+      {
+        title: "Government of Canada Scholarships",
+        category: "Scholarship",
+        country: "Canada",
+        description: "Find information about scholarships for international students.",
+        link: "https://www.educanada.ca/scholarships-bourses/index.aspx?lang=eng"
+      },
+      {
+        title: "UK Government Scholarships",
+        category: "Scholarship",
+        country: "United Kingdom",
+        description: "Explore UK scholarship information through the Chevening programme.",
+        link: "https://www.chevening.org/"
+      },
+      {
+        title: "Kenya Government Opportunities",
+        category: "Grant",
+        country: "Kenya",
+        description: "Explore youth initiatives and government employment information in Kenya.",
+        link: "https://www.labourmarket.go.ke/youth-initiatives/"
+      },
+      {
+        title: "USA Fulbright Program",
+        category: "Scholarship",
+        country: "United States",
+        description: "Explore international educational exchange opportunities.",
+        link: "https://fulbrightprogram.org/"
+      }
+    ];
+
+    const GOOGLE_SHEET_URL =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6X1KjNwmGhNFVpkAEeQIf3jxOpDeXML4e1tftya-0AGtkgcwIQtVy0WElZTSwIH3qIapUVoFBKmAv/pub?gid=1040139166&single=true&output=csv";
+
+    let opportunities = [...starterOpportunities];
+
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let value = "";
+      let insideQuotes = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const next = text[i + 1];
+
+        if (char === '"' && insideQuotes && next === '"') {
+          value += '"';
           i++;
+        } else if (char === '"') {
+          insideQuotes = !insideQuotes;
+        } else if (char === "," && !insideQuotes) {
+          row.push(value);
+          value = "";
+        } else if ((char === "\n" || char === "\r") && !insideQuotes) {
+          if (char === "\r" && next === "\n") {
+            i++;
+          }
+
+          row.push(value);
+
+          if (row.some(cell => cell.trim() !== "")) {
+            rows.push(row);
+          }
+
+          row = [];
+          value = "";
+        } else {
+          value += char;
         }
+      }
 
-        row.push(value);
+      row.push(value);
 
-        if (row.some(cell => cell.trim() !== "")) {
-          rows.push(row);
-        }
+      if (row.some(cell => cell.trim() !== "")) {
+        rows.push(row);
+      }
 
-        row = [];
-        value = "";
-      } else {
-        value += char;
+      return rows;
+    }
+
+    function clean(value) {
+      return String(value || "").trim();
+    }
+
+    function normaliseHeader(value) {
+      return clean(value)
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "");
+    }
+
+    function findColumn(headers, possibleNames) {
+      return headers.findIndex(header =>
+        possibleNames.includes(normaliseHeader(header))
+      );
+    }
+
+    function isSafeLink(link) {
+      try {
+        const url = new URL(link);
+        return url.protocol === "https:" || url.protocol === "http:";
+      } catch {
+        return false;
       }
     }
 
-    row.push(value);
+    function convertSheetRows(csvText) {
+      const rows = parseCSV(csvText.replace(/^\uFEFF/, ""));
 
-    if (row.some(cell => cell.trim() !== "")) {
-      rows.push(row);
-    }
-
-    return rows;
-  }
-
-  function clean(value) {
-    return String(value || "").trim();
-  }
-
-  function normaliseHeader(value) {
-    return clean(value)
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, "");
-  }
-
-  function findColumn(headers, possibleNames) {
-    return headers.findIndex(header =>
-      possibleNames.includes(normaliseHeader(header))
-    );
-  }
-
-  // Convert approved spreadsheet rows into website listings.
-  function convertSheetRows(csvText) {
-    const rows = parseCSV(csvText.replace(/^\uFEFF/, ""));
-
-    if (rows.length < 2) {
-      return [];
-    }
-
-    const headers = rows[0];
-
-    const titleColumn = findColumn(headers, ["title", "opportunitytitle"]);
-    const categoryColumn = findColumn(headers, ["category", "opportunitycategory"]);
-    const countryColumn = findColumn(headers, ["country", "eligiblecountry", "eligiblecountries"]);
-    const descriptionColumn = findColumn(headers, ["description", "opportunitydescription"]);
-    const linkColumn = findColumn(headers, ["officiallink", "officialapplicationlink", "link", "website"]);
-    const deadlineColumn = findColumn(headers, ["deadline", "applicationdeadline"]);
-
-    if (titleColumn === -1 || linkColumn === -1) {
-      return [];
-    }
-
-    return rows.slice(1).map(row => {
-      const get = index => index === -1 ? "" : clean(row[index]);
-
-      return {
-        title: get(titleColumn),
-        category: get(categoryColumn) || "Other",
-        country: get(countryColumn) || "Global",
-        description: get(descriptionColumn),
-        link: get(linkColumn),
-        deadline: get(deadlineColumn)
-      };
-    }).filter(item => {
-      return item.title && isSafeLink(item.link);
-    });
-  }
-
-  // Only allow normal HTTP and HTTPS website links.
-  function isSafeLink(link) {
-    try {
-      const url = new URL(link);
-      return url.protocol === "https:" || url.protocol === "http:";
-    } catch {
-      return false;
-    }
-  }
-
-  // Merge spreadsheet listings with the original opportunities.
-  // If a title is repeated, the spreadsheet version is used.
-  function mergeOpportunities(sheetItems) {
-    const merged = new Map();
-
-    starterOpportunities.forEach(item => {
-      merged.set(item.title.toLowerCase().trim(), item);
-    });
-
-    sheetItems.forEach(item => {
-      const key = item.title.toLowerCase().trim();
-      merged.set(key, item);
-    });
-
-    opportunities = Array.from(merged.values());
-  }
-
-  function showOpportunities() {
-    const term = clean(document.getElementById("search").value).toLowerCase();
-    const category = document.getElementById("category").value;
-    const country = document.getElementById("country").value;
-
-    const filtered = opportunities.filter(item => {
-      const searchableText = [
-        item.title,
-        item.description,
-        item.category,
-        item.country,
-        item.deadline || ""
-      ].join(" ").toLowerCase();
-
-      const matchesSearch = searchableText.includes(term);
-      const matchesCategory = !category || item.category.toLowerCase() === category.toLowerCase();
-
-      const countries = item.country
-        .split(/[,;]/)
-        .map(value => value.trim().toLowerCase());
-
-      let matchesCountry = true;
-
-      if (country === "Global") {
-        matchesCountry = countries.includes("global");
-      } else if (country) {
-        matchesCountry =
-          countries.includes("global") ||
-          countries.some(value => value.includes(country.toLowerCase()));
+      if (rows.length < 2) {
+        return [];
       }
 
-      return matchesSearch && matchesCategory && matchesCountry;
-    });
+      const headers = rows[0];
 
-    const results = document.getElementById("results");
-    results.replaceChildren();
+      const titleColumn = findColumn(headers, ["title", "opportunitytitle"]);
+      const categoryColumn = findColumn(headers, ["category", "opportunitycategory"]);
+      const countryColumn = findColumn(headers, ["country", "eligiblecountry", "eligiblecountries"]);
+      const descriptionColumn = findColumn(headers, ["description", "opportunitydescription"]);
+      const linkColumn = findColumn(headers, ["officiallink", "officialapplicationlink", "link", "website"]);
+      const deadlineColumn = findColumn(headers, ["deadline", "applicationdeadline"]);
 
-    if (!filtered.length) {
-      const empty = document.createElement("div");
-      empty.className = "empty";
-      empty.textContent = "No matching opportunities found. Try another search or filter.";
-      results.appendChild(empty);
-      return;
-    }
-
-    filtered.forEach(item => {
-      const card = document.createElement("article");
-      card.className = "card";
-
-      const tag = document.createElement("span");
-      tag.className = "tag";
-      tag.textContent = item.category;
-
-      const title = document.createElement("h3");
-      title.textContent = item.title;
-
-      const location = document.createElement("p");
-      const locationStrong = document.createElement("strong");
-      locationStrong.textContent = "Location: ";
-      location.append(locationStrong, document.createTextNode(item.country));
-
-      const description = document.createElement("p");
-      description.textContent = item.description || "Visit the official website for more information.";
-
-      card.append(tag, title, location, description);
-
-      if (item.deadline) {
-        const deadline = document.createElement("p");
-        deadline.className = "deadline";
-
-        const deadlineStrong = document.createElement("strong");
-        deadlineStrong.textContent = "Deadline: ";
-
-        deadline.append(deadlineStrong, document.createTextNode(item.deadline));
-        card.appendChild(deadline);
+      if (titleColumn === -1 || linkColumn === -1) {
+        return [];
       }
 
-      const link = document.createElement("a");
-      link.href = item.link;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "Visit Official Website ↗";
+      return rows.slice(1).map(row => {
+        const get = index => index === -1 ? "" : clean(row[index]);
 
-      card.appendChild(link);
-      results.appendChild(card);
-    });
-  }
+        return {
+          title: get(titleColumn),
+          category: get(categoryColumn) || "Other",
+          country: get(countryColumn) || "Global",
+          description: get(descriptionColumn),
+          link: get(linkColumn),
+          deadline: get(deadlineColumn)
+        };
+      }).filter(item => item.title && isSafeLink(item.link));
+    }
 
-  // Load the published Google Sheets opportunities.
-  async function loadPublishedOpportunities() {
-    const status = document.getElementById("loadStatus");
+    function mergeOpportunities(sheetItems) {
+      const merged = new Map();
 
-    try {
-      const response = await fetch(GOOGLE_SHEET_URL, {
-        cache: "no-store"
+      starterOpportunities.forEach(item => {
+        merged.set(item.title.toLowerCase().trim(), item);
       });
 
-      if (!response.ok) {
-        throw new Error("Could not load the published spreadsheet.");
-      }
+      sheetItems.forEach(item => {
+        const key = item.title.toLowerCase().trim();
+        merged.set(key, item);
+      });
 
-      const csvText = await response.text();
-
-      if (csvText.trim().startsWith("<")) {
-        throw new Error("The spreadsheet did not return CSV data.");
-      }
-
-      const sheetItems = convertSheetRows(csvText);
-
-      mergeOpportunities(sheetItems);
-      showOpportunities();
-
-      status.textContent = sheetItems.length
-        ? "Original listings and " + sheetItems.length + " published submissions loaded."
-        : "Showing featured opportunities. New approved listings will appear here when published.";
-
-    } catch (error) {
-      console.error("Google Sheets loading error:", error);
-
-      opportunities = [...starterOpportunities];
-      showOpportunities();
-
-      status.textContent = "Showing featured opportunities. Published submissions could not be loaded right now.";
+      opportunities = Array.from(merged.values());
     }
-  }
 
-  // Search and filters.
-  document.getElementById("search").addEventListener("input", showOpportunities);
+    function showOpportunities() {
+      const term = clean(document.getElementById("search").value).toLowerCase();
+      const category = document.getElementById("category").value;
+      const country = document.getElementById("country").value;
 
-  document.getElementById("searchButton").addEventListener("click", showOpportunities);
+      const filtered = opportunities.filter(item => {
+        const searchableText = [
+          item.title,
+          item.description,
+          item.category,
+          item.country,
+          item.deadline || ""
+        ].join(" ").toLowerCase();
 
-  document.getElementById("category").addEventListener("change", showOpportunities);
+        const matchesSearch = searchableText.includes(term);
 
-  document.getElementById("country").addEventListener("change", showOpportunities);
+        const matchesCategory =
+          !category ||
+          item.category.toLowerCase() === category.toLowerCase();
 
-  // Show original listings immediately, then load the spreadsheet.
-  showOpportunities();
-  loadPublishedOpportunities();
-</script>
+        const countries = item.country
+          .split(/[,;]/)
+          .map(value => value.trim().toLowerCase());
 
-<section id="scholarships" style="padding:40px 20px;max-width:1000px;margin:auto;">
-  <h2>🎓 Scholarships for 2027</h2>
-  <p>Explore funding opportunities for international students.</p>
+        let matchesCountry = true;
 
-  <div style="border:1px solid #ddd;padding:20px;border-radius:12px;margin:20px 0;">
-    <h3>Commonwealth Shared Scholarships 2027</h3>
-    <p><strong>Destination:</strong> United Kingdom</p>
-    <p><strong>Study level:</strong> Master's degree</p>
-    <p><strong>Eligibility:</strong> Eligible Commonwealth countries.</p>
-    <p><strong>Deadline:</strong> 8 December 2026, 4:00 PM GMT. Check the official programme for current details.</p>
-    <a href="https://cscuk.fcdo.gov.uk/scholarships/commonwealth-shared-scholarships" target="_blank" rel="noopener noreferrer">Official application information</a>
-  </div>
+        if (country === "Global") {
+          matchesCountry = countries.includes("global");
+        } else if (country) {
+          matchesCountry =
+            countries.includes("global") ||
+            countries.some(value => value.includes(country.toLowerCase()));
+        }
 
-  <div style="border:1px solid #ddd;padding:20px;border-radius:12px;margin:20px 0;">
-    <h3>Erasmus Mundus Joint Master's Scholarships</h3>
-    <p><strong>Destination:</strong> Europe</p>
-    <p><strong>Study level:</strong> Master's degree</p>
-    <p><strong>Eligibility:</strong> Students from around the world.</p>
-    <p><strong>Deadline:</strong> Varies by programme.</p>
-    <a href="https://erasmus-plus.ec.europa.eu/opportunities/individuals/students/erasmus-mundus-joint-masters" target="_blank" rel="noopener noreferrer">Official scholarship information</a>
-  </div>
-</section>
+        return matchesSearch && matchesCategory && matchesCountry;
+      });
+
+      const results = document.getElementById("results");
+      results.replaceChildren();
+
+      if (!filtered.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent =
+          "No matching opportunities found. Try another search or filter.";
+        results.appendChild(empty);
+        return;
+      }
+
+      filtered.forEach(item => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = item.category;
+
+        const title = document.createElement("h3");
+        title.textContent = item.title;
+
+        const location = document.createElement("p");
+        const locationStrong = document.createElement("strong");
+        locationStrong.textContent = "Location: ";
+        location.append(
+          locationStrong,
+          document.createTextNode(item.country)
+        );
+
+        const description = document.createElement("p");
+        description.textContent =
+          item.description || "Visit the official website for more information.";
+
+        card.append(tag, title, location, description);
+
+        if (item.deadline) {
+          const deadline = document.createElement("p");
+          deadline.className = "deadline";
+
+          const deadlineStrong = document.createElement("strong");
+          deadlineStrong.textContent = "Deadline: ";
+
+          deadline.append(
+            deadlineStrong,
+            document.createTextNode(item.deadline)
+          );
+
+          card.appendChild(deadline);
+        }
+
+        const link = document.createElement("a");
+        link.href = item.link;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Visit Official Website ↗";
+
+        card.appendChild(link);
+        results.appendChild(card);
+      });
+    }
+
+    async function loadPublishedOpportunities() {
+      const status = document.getElementById("loadStatus");
+
+      try {
+        const response = await fetch(GOOGLE_SHEET_URL, {
+          cache: "no-store"
+        });
+
+        if (!response.ok) {
+          throw new Error("Could not load the published spreadsheet.");
+        }
+
+        const csvText = await response.text();
+
+        if (csvText.trim().startsWith("<")) {
+          throw new Error("The spreadsheet did not return CSV data.");
+        }
+
+        const sheetItems = convertSheetRows(csvText);
+
+        mergeOpportunities(sheetItems);
+        showOpportunities();
+
+        status.textContent = sheetItems.length
+          ? "Featured opportunities and " + sheetItems.length +
+            " published submissions loaded."
+          : "Showing featured opportunities. New approved listings will appear here when published.";
+
+      } catch (error) {
+        console.error("Google Sheets loading error:", error);
+
+        opportunities = [...starterOpportunities];
+        showOpportunities();
+
+        status.textContent =
+          "Showing featured opportunities. Published submissions could not be loaded right now.";
+      }
+    }
+
+    document.getElementById("search").addEventListener("input", showOpportunities);
+
+    document.getElementById("searchButton").addEventListener("click", showOpportunities);
+
+    document.getElementById("category").addEventListener("change", showOpportunities);
+
+    document.getElementById("country").addEventListener("change", showOpportunities);
+
+    showOpportunities();
+    loadPublishedOpportunities();
+  </script>
 
 </body>
 </html>
+
 
