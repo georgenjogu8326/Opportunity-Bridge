@@ -814,3 +814,427 @@
     <p>Our mission is to make opportunities easier to discover and help people build a better future, regardless of where they come from.</p>
     <p>Our platform is free to use. We support its growth through clearly identified partnerships, sponsored listings, advertising and affiliate marketing.</p>
   </div>
+</section>
+
+<section class="submit-section">
+  <h2>Have an Opportunity to Share?</h2>
+  <p>Organisations, schools, companies and opportunity providers can submit scholarships, grants, internships, jobs and free courses for review.</p>
+  <a class="submit-button" href="https://forms.gle/WHiHb7F9pwdY1zmi7" target="_blank" rel="noopener noreferrer">Submit an Opportunity</a>
+</section>
+
+<section id="advertise" class="submit-section">
+  <h2>Advertise With Opportunity Bridge</h2>
+  <p>Are you an organisation, company or training provider? Promote your scholarships, jobs, internships, grants and training programmes to people around the world.</p>
+  <a class="submit-button" href="https://forms.gle/yD8N5q5LvPz44RweA" target="_blank" rel="noopener noreferrer">Advertise With Us</a>
+</section>
+
+<div class="notice">
+  <strong>Important:</strong> Always visit the official website to confirm eligibility, application deadlines and requirements. Opportunities may close or change. Opportunity Bridge does not guarantee selection or funding. Never pay an unknown person to secure a scholarship.
+</div>
+
+<section id="contact" class="submit-section">
+  <h2>Contact Opportunity Bridge</h2>
+  <p>Have a question, partnership proposal, advertising inquiry or feedback? We would love to hear from you.</p>
+  <p>Email: <a href="mailto:georgenjogu673@gmail.com">Contact Opportunity Bridge</a></p>
+  <a class="submit-button" href="https://forms.gle/WHiHb7F9pwdY1zmi7" target="_blank" rel="noopener noreferrer">Submit an Opportunity</a>
+</section>
+
+</main>
+
+<footer>
+  <p><strong>🌍 Opportunity Bridge</strong></p>
+  <p>Discover opportunities. Unlock your future.</p>
+  <p>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms & Conditions</a>
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+  <p>© 2026 Opportunity Bridge. All rights reserved.</p>
+</footer>
+
+<script>
+  const starterOpportunities = [
+    {
+      title: "Explore Global Scholarships",
+      category: "Scholarship",
+      country: "Global",
+      description: "Discover educational funding opportunities around the world.",
+      link: "https://www.scholarshipportal.com/"
+    },
+    {
+      title: "World Bank Scholarships",
+      category: "Scholarship",
+      country: "Global",
+      description: "Explore scholarship information and education opportunities.",
+      link: "https://www.worldbank.org/en/programs/scholarships"
+    },
+    {
+      title: "Google Free Courses",
+      category: "Free Course",
+      country: "Global",
+      description: "Develop digital and professional skills through online learning.",
+      link: "https://grow.google/"
+    },
+    {
+      title: "UN Careers and Internships",
+      category: "Internship",
+      country: "Global",
+      description: "Explore career opportunities and internships with the United Nations.",
+      link: "https://careers.un.org/"
+    },
+    {
+      title: "Government of Canada Scholarships",
+      category: "Scholarship",
+      country: "Canada",
+      description: "Find information about scholarships for international students.",
+      link: "https://www.educanada.ca/scholarships-bourses/index.aspx?lang=eng"
+    },
+    {
+      title: "UK Government Scholarships",
+      category: "Scholarship",
+      country: "United Kingdom",
+      description: "Explore UK scholarship information through the Chevening programme.",
+      link: "https://www.chevening.org/"
+    },
+    {
+      title: "Kenya Government Opportunities",
+      category: "Grant",
+      country: "Kenya",
+      description: "Explore youth initiatives and government employment information in Kenya.",
+      link: "https://www.labourmarket.go.ke/youth-initiatives/"
+    },
+    {
+      title: "USA Fulbright Program",
+      category: "Scholarship",
+      country: "United States",
+      description: "Explore international educational exchange opportunities.",
+      link: "https://fulbrightprogram.org/"
+    }
+  ];
+
+  const GOOGLE_SHEET_URL =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6X1KjNwmGhNFVpkAEeQIf3jxOpDeXML4e1tftya-0AGtkgcwIQtVy0WElZTSwIH3qIapUVoFBKmAv/pub?gid=1040139166&single=true&output=csv";
+
+  let opportunities = [...starterOpportunities];
+
+  function parseCSV(text) {
+    const rows = [];
+    let row = [];
+    let value = "";
+    let insideQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const next = text[i + 1];
+
+      if (char === '"' && insideQuotes && next === '"') {
+        value += '"';
+        i++;
+      } else if (char === '"') {
+        insideQuotes = !insideQuotes;
+      } else if (char === "," && !insideQuotes) {
+        row.push(value);
+        value = "";
+      } else if ((char === "\n" || char === "\r") && !insideQuotes) {
+        if (char === "\r" && next === "\n") i++;
+        row.push(value);
+
+        if (row.some(cell => cell.trim() !== "")) rows.push(row);
+
+        row = [];
+        value = "";
+      } else {
+        value += char;
+      }
+    }
+
+    row.push(value);
+    if (row.some(cell => cell.trim() !== "")) rows.push(row);
+
+    return rows;
+  }
+
+  function clean(value) {
+    return String(value || "").trim();
+  }
+
+  function normaliseHeader(value) {
+    return clean(value).toLowerCase().replace(/[^a-z0-9]/g, "");
+  }
+
+  function findColumn(headers, possibleNames) {
+    return headers.findIndex(header =>
+      possibleNames.includes(normaliseHeader(header))
+    );
+  }
+
+  function isSafeLink(link) {
+    try {
+      const url = new URL(link);
+      return url.protocol === "https:" || url.protocol === "http:";
+    } catch {
+      return false;
+    }
+  }
+
+  function convertSheetRows(csvText) {
+    const rows = parseCSV(csvText.replace(/^\uFEFF/, ""));
+
+    if (rows.length < 2) return [];
+
+    const headers = rows[0];
+
+    const titleColumn = findColumn(headers, ["title", "opportunitytitle"]);
+    const categoryColumn = findColumn(headers, ["category", "opportunitycategory"]);
+    const countryColumn = findColumn(headers, ["country", "eligiblecountry", "eligiblecountries"]);
+    const descriptionColumn = findColumn(headers, ["description", "opportunitydescription"]);
+    const linkColumn = findColumn(headers, ["officiallink", "officialapplicationlink", "link", "website"]);
+    const deadlineColumn = findColumn(headers, ["deadline", "applicationdeadline"]);
+    const statusColumn = findColumn(headers, ["reviewstatus"]);
+
+    if (titleColumn === -1 || linkColumn === -1 || statusColumn === -1) {
+      console.error("Required spreadsheet columns are missing.");
+      return [];
+    }
+
+    return rows.slice(1).map(row => {
+      const get = index => index === -1 ? "" : clean(row[index]);
+
+      return {
+        title: get(titleColumn),
+        category: get(categoryColumn) || "Other",
+        country: get(countryColumn) || "Global",
+        description: get(descriptionColumn),
+        link: get(linkColumn),
+        deadline: get(deadlineColumn),
+        reviewStatus: get(statusColumn).toLowerCase()
+      };
+    }).filter(item =>
+      item.title &&
+      item.reviewStatus === "approved" &&
+      isSafeLink(item.link)
+    );
+  }
+
+  function mergeOpportunities(sheetItems) {
+    const merged = new Map();
+
+    starterOpportunities.forEach(item => {
+      merged.set(item.title.toLowerCase().trim(), item);
+    });
+
+    sheetItems.forEach(item => {
+      const key = item.title.toLowerCase().trim();
+      merged.set(key, item);
+    });
+
+    opportunities = Array.from(merged.values());
+  }
+
+  // Quick-filter helper when clicking category cards at the top
+  function quickFilter(categoryName) {
+    document.getElementById("search").value = "";
+    document.getElementById("country").value = "";
+    document.getElementById("category").value = categoryName;
+    showOpportunities();
+  }
+
+  // Apply URL query parameters (e.g., ?category=Scholarship&country=Canada&q=grant)
+  function applyUrlFilters() {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    const cat = params.get("category");
+    const ctry = params.get("country");
+    let hasParam = false;
+
+    if (q) {
+      document.getElementById("search").value = q;
+      hasParam = true;
+    }
+
+    if (cat) {
+      const catSelect = document.getElementById("category");
+      for (const opt of catSelect.options) {
+        if (opt.value.toLowerCase() === cat.toLowerCase()) {
+          catSelect.value = opt.value;
+          hasParam = true;
+          break;
+        }
+      }
+    }
+
+    if (ctry) {
+      const ctrySelect = document.getElementById("country");
+      for (const opt of ctrySelect.options) {
+        if (opt.value.toLowerCase() === ctry.toLowerCase()) {
+          ctrySelect.value = opt.value;
+          hasParam = true;
+          break;
+        }
+      }
+    }
+
+    if (hasParam) {
+      const target = document.getElementById("live-directory");
+      if (target) target.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  function showOpportunities() {
+    const term = clean(document.getElementById("search").value).toLowerCase();
+    const category = document.getElementById("category").value;
+    const country = document.getElementById("country").value;
+
+    const resetBtn = document.getElementById("resetFilters");
+    resetBtn.style.display = (term || category || country) ? "inline-block" : "none";
+
+    const filtered = opportunities.filter(item => {
+      const searchableText = [
+        item.title,
+        item.description,
+        item.category,
+        item.country,
+        item.deadline || ""
+      ].join(" ").toLowerCase();
+
+      const matchesSearch = searchableText.includes(term);
+
+      const matchesCategory =
+        !category ||
+        item.category.toLowerCase() === category.toLowerCase();
+
+      const countries = item.country
+        .split(/[,;]/)
+        .map(value => value.trim().toLowerCase());
+
+      let matchesCountry = true;
+
+      if (country === "Global") {
+        matchesCountry = countries.includes("global");
+      } else if (country) {
+        matchesCountry =
+          countries.includes("global") ||
+          countries.some(value => value.includes(country.toLowerCase()));
+      }
+
+      return matchesSearch && matchesCategory && matchesCountry;
+    });
+
+    const results = document.getElementById("results");
+    results.replaceChildren();
+
+    if (!filtered.length) {
+      const empty = document.createElement("div");
+      empty.className = "empty";
+      empty.textContent = "No matching opportunities found. Try another search or click Reset Filters.";
+      results.appendChild(empty);
+      return;
+    }
+
+    filtered.forEach(item => {
+      const card = document.createElement("article");
+      card.className = "card";
+
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = item.category;
+
+      const title = document.createElement("h3");
+      title.textContent = item.title;
+
+      const location = document.createElement("p");
+      const locationStrong = document.createElement("strong");
+      locationStrong.textContent = "Location: ";
+      location.append(locationStrong, document.createTextNode(item.country));
+
+      const description = document.createElement("p");
+      description.textContent =
+        item.description || "Visit the official website for more information.";
+
+      card.append(tag, title, location, description);
+
+      if (item.deadline) {
+        const deadline = document.createElement("p");
+        deadline.className = "deadline";
+
+        const deadlineStrong = document.createElement("strong");
+        deadlineStrong.textContent = "Deadline: ";
+
+        deadline.append(deadlineStrong, document.createTextNode(item.deadline));
+        card.appendChild(deadline);
+      }
+
+      const link = document.createElement("a");
+      link.href = item.link;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Visit Official Website ↗";
+
+      card.appendChild(link);
+      results.appendChild(card);
+    });
+  }
+
+  function resetAllFilters() {
+    document.getElementById("search").value = "";
+    document.getElementById("category").value = "";
+    document.getElementById("country").value = "";
+    if (window.location.search) {
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+    showOpportunities();
+  }
+
+  async function loadPublishedOpportunities() {
+    const status = document.getElementById("loadStatus");
+
+    try {
+      const response = await fetch(GOOGLE_SHEET_URL, {
+        cache: "no-store"
+      });
+
+      if (!response.ok) {
+        throw new Error("Could not load the published spreadsheet.");
+      }
+
+      const csvText = await response.text();
+
+      if (csvText.trim().startsWith("<")) {
+        throw new Error("The spreadsheet did not return CSV data.");
+      }
+
+      const sheetItems = convertSheetRows(csvText);
+
+      mergeOpportunities(sheetItems);
+      showOpportunities();
+
+      status.textContent = sheetItems.length
+        ? "Featured opportunities and " + sheetItems.length + " approved submissions loaded."
+        : "Showing featured opportunities. New approved listings will appear here when published.";
+
+    } catch (error) {
+      console.error("Google Sheets loading error:", error);
+
+      opportunities = [...starterOpportunities];
+      showOpportunities();
+
+      status.textContent =
+        "Showing featured opportunities. Published submissions will appear here once available.";
+    }
+  }
+
+  document.getElementById("search").addEventListener("input", showOpportunities);
+  document.getElementById("searchButton").addEventListener("click", () => {
+    showOpportunities();
+    document.getElementById("live-directory").scrollIntoView({ behavior: "smooth" });
+  });
+  document.getElementById("category").addEventListener("change", showOpportunities);
+  document.getElementById("country").addEventListener("change", showOpportunities);
+  document.getElementById("resetFilters").addEventListener("click", resetAllFilters);
+
+  applyUrlFilters();
+  loadPublishedOpportunities();
+</script>
+
+</body>
+</html>
