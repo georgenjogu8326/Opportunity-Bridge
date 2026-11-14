@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>International Scholarships 2027 | Opportunity Bridge</title>
+
+  <meta name="description" content="Discover international scholarships for undergraduate, postgraduate and doctoral students. Explore eligibility, deadlines and official application links.">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6fb;
+      color: #24344d;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #102b55;
+      color: white;
+      padding: 35px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+    }
+
+    header p {
+      max-width: 700px;
+      margin: auto;
+      color: #e0e9f5;
+    }
+
+    nav {
+      background: #0b2040;
+      padding: 13px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 12px;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 30px auto;
+      padding: 0 18px;
+    }
+
+    .intro {
+      margin-bottom: 22px;
+    }
+
+    .intro h2 {
+      color: #102b55;
+      margin-bottom: 5px;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: white;
+      font-size: 15px;
+    }
+
+    .results {
+      margin: 15px 0;
+      color: #53657e;
+      font-size: 14px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      border: 1px solid #dce4ef;
+      box-shadow: 0 4px 14px rgba(20, 45, 80, 0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e4f4eb;
+      color: #17633d;
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 12px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .card h3 {
+      color: #153c70;
+      margin: 0 0 15px;
+      font-size: 19px;
+    }
+
+    .detail {
+      margin: 7px 0;
+      font-size: 14px;
+      color: #52647c;
+      overflow-wrap: anywhere;
+    }
+
+    .description {
+      font-size: 14px;
+      margin: 12px 0;
+      color: #52647c;
+    }
+
+    .apply {
+      display: block;
+      text-align: center;
+      background: #176bb0;
+      color: white;
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 7px;
+      margin-top: auto;
+      font-weight: bold;
+    }
+
+    .apply:hover {
+      background: #104e83;
+    }
+
+    .empty, .loading, .error {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      color: #52647c;
+      grid-column: 1 / -1;
+    }
+
+    footer {
+      background: #102b55;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: #f5c451;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 25px;
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 5px 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🎓 International Scholarship Directory</h1>
+  <p>
+    Discover scholarship opportunities around the world.
+    Find funding information, check eligibility and visit official application websites.
+  </p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="scholarship-guide.html">Scholarship Guide</a>
+  <a href="index.html#submit">Submit an Opportunity</a>
+</nav>
+
+<main class="container">
+
+  <section class="intro">
+    <h2>Explore Scholarships</h2>
+    <p>
+      Search approved scholarship opportunities by name or country.
+      Always check the official provider's website before applying.
+    </p>
+  </section>
+
+  <section class="filters">
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="Search scholarships..."
+      aria-label="Search scholarships"
+    >
+
+    <select id="countryFilter" aria-label="Filter by country">
+      <option value="">All countries</option>
+    </select>
+  </section>
+
+  <p class="results" id="resultsCount">Loading scholarships...</p>
+
+  <section class="cards" id="scholarshipCards">
+    <div class="loading">Loading approved scholarships...</div>
+  </section>
+
+</main>
+
+<footer>
+  <p><strong>Opportunity Bridge 🌍</strong></p>
+  <p>Connecting people to global opportunities.</p>
+  <p>
+    <a href="index.html">Return to homepage</a>
+  </p>
+  <p>Always verify scholarship information with the official provider.</p>
+</footer>
+
+<script>
+  const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6X1KjNwmGhNFVpkAEeQIf3jxOpDeXML4e1tftya-0AGtkgcwIQtVy0WElZTSwIH3qIapUVoFBKmAv/pub?gid=1040139166&single=true&output=csv";
+
+  const cards = document.getElementById("scholarshipCards");
+  const searchInput = document.getElementById("searchInput");
+  const countryFilter = document.getElementById("countryFilter");
+  const resultsCount = document.getElementById("resultsCount");
+
+  let scholarships = [];
+
+  function parseCSV(text) {
+    const rows = [];
+    let row = [];
+    let value = "";
+    let insideQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const next = text[i + 1];
+
+      if (char === '"' && insideQuotes && next === '"') {
+        value += '"';
+        i++;
+      } else if (char === '"') {
+        insideQuotes = !insideQuotes;
+      } else if (char === "," && !insideQuotes) {
+        row.push(value.trim());
+        value = "";
+      } else if ((char === "\n" || char === "\r") && !insideQuotes) {
+        if (char === "\r" && next === "\n") i++;
+        row.push(value.trim());
+
+        if (row.some(cell => cell !== "")) {
+          rows.push(row);
+        }
+
+        row = [];
+        value = "";
+      } else {
+        value += char;
+      }
+    }
+
+    row.push(value.trim());
+
+    if (row.some(cell => cell !== "")) {
+      rows.push(row);
+    }
+
+    return rows;
+  }
+
+  function clean(value) {
+    return (value || "").trim();
+  }
+
+  function findColumn(headers, possibleNames) {
+    return headers.findIndex(header =>
+      possibleNames.includes(
+        clean(header).toLowerCase().replace(/[^a-z0-9]/g, "")
+      )
+    );
+  }
+
+  function safeLink(value) {
+    try {
+      const url = new URL(value);
+      return url.protocol === "https:" || url.protocol === "http:";
+    } catch {
+      return false;
+    }
+  }
+
+  function convertRows(csvText) {
+    const rows = parseCSV(csvText.replace(/^\uFEFF/, ""));
+
+    if (rows.length < 2) return [];
+
+    const headers = rows[0];
+
+    const titleCol = findColumn(headers, ["title", "opportunitytitle"]);
+    const categoryCol = findColumn(headers, ["category", "opportunitycategory"]);
+    const countryCol = findColumn(headers, ["country", "eligiblecountry", "eligiblecountries"]);
+    const descriptionCol = findColumn(headers, ["description", "opportunitydescription"]);
+    const linkCol = findColumn(headers, ["officiallink", "officialapplicationlink", "link", "website"]);
+    const deadlineCol = findColumn(headers, ["deadline", "applicationdeadline"]);
+    const statusCol = findColumn(headers, ["reviewstatus"]);
+
+    if (titleCol === -1 || linkCol === -1 || statusCol === -1) {
+      throw new Error("The spreadsheet must include Title, Official Link and Review Status columns.");
+    }
+
+    return rows.slice(1).map(row => {
+      const get = index => index === -1 ? "" : clean(row[index]);
+
+      return {
+        title: get(titleCol),
+        category: get(categoryCol),
+        country: get(countryCol) || "Global",
+        description: get(descriptionCol),
+        link: get(linkCol),
+        deadline: get(deadlineCol),
+        status: get(statusCol).toLowerCase()
+      };
+    }).filter(item =>
+      item.title &&
+      item.category.toLowerCase().includes("scholarship") &&
+      item.status === "approved" &&
+      safeLink(item.link)
+    );
+  }
+
+  function populateCountries() {
+    const countries = [...new Set(
+      scholarships.map(item => item.country)
+    )].sort();
+
+    countryFilter.innerHTML = '<option value="">All countries</option>';
+
+    countries.forEach(country => {
+      const option = document.createElement("option");
+      option.value = country;
+      option.textContent = country;
+      countryFilter.appendChild(option);
+    });
+  }
+
+  function renderScholarships() {
+    const search = searchInput.value.toLowerCase().trim();
+    const country = countryFilter.value;
+
+    const filtered = scholarships.filter(item => {
+      const matchesSearch =
+        item.title.toLowerCase().includes(search) ||
+        item.description.toLowerCase().includes(search) ||
+        item.country.toLowerCase().includes(search);
+
+      const matchesCountry = !country || item.country === country;
+
+      return matchesSearch && matchesCountry;
+    });
+
+    resultsCount.textContent =
+      filtered.length + (filtered.length === 1 ? " scholarship found" : " scholarships found");
+
+    cards.innerHTML = "";
+
+    if (filtered.length === 0) {
+      cards.innerHTML = `
+        <div class="empty">
+          <h3>No scholarships found yet</h3>
+          <p>Try another search, or check back later for newly approved scholarships.</p>
+        </div>
+      `;
+      return;
+    }
+
+    filtered.forEach(item => {
+      const card = document.createElement("article");
+      card.className = "card";
+
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = "Approved scholarship";
+
+      const title = document.createElement("h3");
+      title.textContent = item.title;
+
+      const countryText = document.createElement("p");
+      countryText.className = "detail";
+      countryText.textContent = "🌍 Country: " + item.country;
+
+      const deadlineText = document.createElement("p");
+      deadlineText.className = "detail";
+      deadlineText.textContent = "📅 Deadline: " + (item.deadline || "Check official website");
+
+      const description = document.createElement("p");
+      description.className = "description";
+      description.textContent = item.description || "Check the official provider's website for scholarship details.";
+
+      const link = document.createElement("a");
+      link.className = "apply";
+      link.href = item.link;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Apply / Official Information ↗";
+
+      card.append(tag, title, countryText, deadlineText, description, link);
+      cards.appendChild(card);
+    });
+  }
+
+  async function loadScholarships() {
+    try {
+      const response = await fetch(SHEET_URL, { cache: "no-store" });
+
+      if (!response.ok) {
+        throw new Error("Could not load the published spreadsheet.");
+      }
+
+      const csvText = await response.text();
+
+      scholarships = convertRows(csvText);
+
+      populateCountries();
+      renderScholarships();
+
+    } catch (error) {
+      console.error("Scholarship directory error:", error);
+
+      resultsCount.textContent = "Scholarships could not be loaded.";
+
+      cards.innerHTML = `
+        <div class="error">
+          <h3>We couldn't load the scholarships.</h3>
+          <p>Please check back later. Our team is working to restore the directory.</p>
+        </div>
+      `;
+    }
+  }
+
+  searchInput.addEventListener("input", renderScholarships);
+  countryFilter.addEventListener("change", renderScholarships);
+
+  loadScholarships();
+</script>
+
+</body>
+</html>
