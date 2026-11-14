@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Jobs and Internships | Opportunity Bridge</title>
+  <meta name="description" content="Discover approved global jobs and internship opportunities on Opportunity Bridge.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #17243b;
+    }
+    header {
+      background: #102747;
+      color: white;
+      padding: 25px 6%;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 35px;
+    }
+    nav a { color: white; text-decoration: none; }
+    .hero { text-align: center; padding: 25px 10px 35px; }
+    .hero h1 { font-size: 36px; margin-bottom: 12px; }
+    .hero p { color: #dce6f3; }
+    .gold { color: #f4c75e; }
+    main { max-width: 1100px; margin: auto; padding: 30px 18px; }
+    .filters {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+    input, select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d5dce6;
+      border-radius: 8px;
+      font-size: 15px;
+      background: white;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 3px 14px #10274712;
+      border: 1px solid #e6ebf2;
+    }
+    .card h2 { font-size: 20px; color: #102747; }
+    .meta { color: #65748a; font-size: 13px; }
+    .description { line-height: 1.6; }
+    .apply {
+      display: inline-block;
+      background: #e9b943;
+      color: #102747;
+      padding: 11px 16px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    #message {
+      text-align: center;
+      padding: 35px 10px;
+      color: #53647a;
+    }
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #102747;
+      color: white;
+      margin-top: 40px;
+    }
+    footer a { color: #f4c75e; }
+    @media(max-width: 600px) {
+      .filters { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 29px; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/scholarships.html">Scholarships</a>
+    <a href="/jobs.html">Jobs & Internships</a>
+    <a href="https://forms.gle/WHiHb7F9pwdY1zmi7">Submit Opportunity</a>
+  </nav>
+
+  <section class="hero">
+    <div class="gold">🌍 OPPORTUNITY BRIDGE</div>
+    <h1>Global Jobs & <span class="gold">Internships</span></h1>
+    <p>Discover opportunities to work, learn and grow.</p>
+  </section>
+</header>
+
+<main>
+  <div class="filters">
+    <input id="search" type="search" placeholder="Search jobs or internships...">
+    <select id="category">
+      <option value="all">All opportunities</option>
+      <option value="job">Jobs</option>
+      <option value="internship">Internships</option>
+    </select>
+  </div>
+
+  <div id="message">Loading opportunities...</div>
+  <section class="grid" id="listings"></section>
+</main>
+
+<footer>
+  <p>© 2026 Opportunity Bridge. Helping people discover opportunities worldwide.</p>
+  <p><a href="/">Back to Home</a></p>
+</footer>
+
+<script>
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6X1KjNwmGhNFVpkAEeQIf3jxOpDeXML4e1tftya-0AGtkgcwIQtVy0WElZTSwIH3qIapUVoFBKmAv/pub?gid=1040139166&single=true&output=csv";
+
+const listings = document.getElementById("listings");
+const message = document.getElementById("message");
+const search = document.getElementById("search");
+const category = document.getElementById("category");
+
+let opportunities = [];
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [];
+  let cell = "";
+  let quoted = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    if (char === '"' && quoted && text[i + 1] === '"') {
+      cell += '"';
+      i++;
+    } else if (char === '"') {
+      quoted = !quoted;
+    } else if (char === "," && !quoted) {
+      row.push(cell);
+      cell = "";
+    } else if ((char === "\n" || char === "\r") && !quoted) {
+      if (char === "\r" && text[i + 1] === "\n") i++;
+      row.push(cell);
+      if (row.some(value => value.trim())) rows.push(row);
+      row = [];
+      cell = "";
+    } else {
+      cell += char;
+    }
+  }
+
+  row.push(cell);
+  if (row.some(value => value.trim())) rows.push(row);
+  return rows;
+}
+
+function safeLink(value) {
+  try {
+    const url = new URL(value);
+    return ["http:", "https:"].includes(url.protocol) ? url.href : "";
+  } catch {
+    return "";
+  }
+}
+
+function render() {
+  const term = search.value.toLowerCase().trim();
+  const selected = category.value;
+
+  const filtered = opportunities.filter(item => {
+    const matchesSearch =
+      `${item.title} ${item.country} ${item.description} ${item.category}`
+        .toLowerCase().includes(term);
+
+    const matchesCategory =
+      selected === "all" || item.category.toLowerCase().includes(selected);
+
+    return matchesSearch && matchesCategory;
+  });
+
+  listings.innerHTML = "";
+
+  if (!filtered.length) {
+    message.textContent = "No approved jobs or internships found yet. Please check again soon.";
+    return;
+  }
+
+  message.textContent = `Found ${filtered.length} opportunity${filtered.length === 1 ? "" : "ies"}.`;
+
+  filtered.forEach(item => {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const title = document.createElement("h2");
+    title.textContent = item.title;
+
+    const meta = document.createElement("p");
+    meta.className = "meta";
+    meta.textContent = `${item.category} · ${item.country} · Deadline: ${item.deadline || "Check official site"}`;
+
+    const description = document.createElement("p");
+    description.className = "description";
+    description.textContent = item.description;
+
+    const link = document.createElement("a");
+    link.className = "apply";
+    link.href = item.link;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "View Opportunity";
+
+    card.append(title, meta, description, link);
+    listings.appendChild(card);
+  });
+}
+
+async function loadOpportunities() {
+  try {
+    const response = await fetch(CSV_URL);
+    if (!response.ok) throw new Error("Unable to load spreadsheet");
+
+    const rows = parseCSV(await response.text());
+    if (!rows.length) throw new Error("Empty spreadsheet");
+
+    const headers = rows[0].map(value =>
+      value.replace(/^\uFEFF/, "").trim().toLowerCase()
+    );
+
+    const titleIndex = headers.indexOf("title");
+    const categoryIndex = headers.indexOf("category");
+    const countryIndex = headers.indexOf("country");
+    const descriptionIndex = headers.indexOf("description");
+    const linkIndex = headers.indexOf("official link");
+    const deadlineIndex = headers.indexOf("deadline");
+    const statusIndex = headers.indexOf("review status");
+
+    if ([titleIndex, categoryIndex, countryIndex, descriptionIndex,
+         linkIndex, deadlineIndex, statusIndex].some(index => index < 0)) {
+      throw new Error("Required spreadsheet columns are missing");
+    }
+
+    opportunities = rows.slice(1).map(row => ({
+      title: (row[titleIndex] || "").trim(),
+      category: (row[categoryIndex] || "").trim(),
+      country: (row[countryIndex] || "").trim(),
+      description: (row[descriptionIndex] || "").trim(),
+      link: safeLink((row[linkIndex] || "").trim()),
+      deadline: (row[deadlineIndex] || "").trim(),
+      status: (row[statusIndex] || "").trim().toLowerCase()
+    })).filter(item =>
+      item.title &&
+      item.link &&
+      item.status === "approved" &&
+      (item.category.toLowerCase().includes("job") ||
+       item.category.toLowerCase().includes("internship"))
+    );
+
+    render();
+  } catch (error) {
+    console.error(error);
+    message.textContent = "We couldn't load the opportunities. Please try again later.";
+  }
+}
+
+search.addEventListener("input", render);
+category.addEventListener("change", render);
+loadOpportunities();
+</script>
+</body>
+</html>
