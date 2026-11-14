@@ -1031,7 +1031,6 @@
     opportunities = Array.from(merged.values());
   }
 
-  // Quick-filter helper when clicking category cards at the top
   function quickFilter(categoryName) {
     document.getElementById("search").value = "";
     document.getElementById("country").value = "";
@@ -1039,7 +1038,6 @@
     showOpportunities();
   }
 
-  // Apply URL query parameters (e.g., ?category=Scholarship&country=Canada&q=grant)
   function applyUrlFilters() {
     const params = new URLSearchParams(window.location.search);
     const q = params.get("q");
