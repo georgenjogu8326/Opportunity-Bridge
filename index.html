@@ -1,7 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head> <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d8ed4490cbda4b3c850ea7be3de24903"}'></script><!-- End Cloudflare Web Analytics -->
+<head>
+  <!-- Cloudflare Web Analytics -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d8ed4490cbda4b3c850ea7be3de24903"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,6 +20,8 @@
   <meta property="og:url" content="https://opportunity-bridge.pages.dev/">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#102e55">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
   <style>
     * { box-sizing: border-box; scroll-behavior: smooth; }
@@ -221,23 +226,97 @@
 
     button:hover { background: #0e4d82; }
 
+    .reset-button {
+      background: #e5effb;
+      color: #14558b;
+      font-weight: bold;
+    }
+
+    .reset-button:hover {
+      background: #d0e3fa;
+    }
+
     main {
       max-width: 1150px;
       margin: 35px auto;
       padding: 0 20px;
     }
 
-    .section-heading { margin-bottom: 22px; }
+    .section-heading {
+      margin-bottom: 24px;
+    }
+
+    .section-heading.centered {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
     .section-heading h2 {
       font-size: 29px;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
       color: #123b67;
     }
 
     .section-heading p {
       color: #617187;
       margin-top: 0;
+    }
+
+    /* Explore Categories & Jobs Grid */
+    .hub-section {
+      padding: 25px 0 45px;
+    }
+
+    .opportunity-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .opportunity-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 3px 13px rgba(20,50,80,.06);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .opportunity-card h3 {
+      color: #102a43;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .opportunity-card p {
+      color: #526477;
+      line-height: 1.6;
+      font-size: 15px;
+      margin-top: 0;
+    }
+
+    .opportunity-card a {
+      display: inline-block;
+      text-align: center;
+      background: #1769aa;
+      color: white;
+      padding: 11px 16px;
+      border-radius: 7px;
+      text-decoration: none;
+      margin-top: auto;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .opportunity-card a:hover {
+      background: #102a43;
+    }
+
+    /* Live Directory Filters & Cards */
+    .directory-section {
+      margin-top: 30px;
+      padding-top: 20px;
     }
 
     .filters {
@@ -279,7 +358,7 @@
       border: 1px solid #e8edf4;
     }
 
-    .card h3 { margin: 12px 0 8px; line-height: 1.4; }
+    .card h3 { margin: 12px 0 8px; line-height: 1.4; color: #123b67; }
 
     .tag {
       display: inline-block;
@@ -289,12 +368,13 @@
       border-radius: 20px;
       font-size: 12px;
       align-self: flex-start;
+      font-weight: bold;
     }
 
     .card p { color: #53647a; line-height: 1.5; }
     .deadline { font-size: 13px; color: #42566f; }
 
-    .card a, .opportunity-card a {
+    .card a {
       display: inline-block;
       text-align: center;
       text-decoration: none;
@@ -303,9 +383,11 @@
       padding: 11px 15px;
       border-radius: 7px;
       margin-top: auto;
+      font-weight: bold;
+      font-size: 14px;
     }
 
-    .card a:hover, .opportunity-card a:hover { background: #0e4d82; }
+    .card a:hover { background: #0e4d82; }
 
     .empty {
       background: white;
@@ -345,6 +427,8 @@
       border-radius: 7px;
       text-decoration: none;
       margin-top: auto;
+      font-weight: bold;
+      font-size: 14px;
     }
 
     .scholarship-card a:hover { background: #0e4d82; }
@@ -357,6 +441,7 @@
       border-radius: 20px;
       font-size: 12px;
       align-self: flex-start;
+      font-weight: bold;
     }
 
     .warning-label { color: #8a4a08; background: #fff1d8; }
@@ -370,7 +455,7 @@
       box-shadow: 0 3px 13px rgba(20,50,80,.06);
     }
 
-    .content-panel h2 { color: #123b67; }
+    .content-panel h2 { color: #123b67; margin-top: 0; }
     .content-panel p { color: #53647a; }
 
     .resource-grid {
@@ -380,7 +465,7 @@
       margin-top: 20px;
     }
 
-    .opportunity-card {
+    .resource-card {
       background: #f8fafd;
       border: 1px solid #e5ebf3;
       border-radius: 10px;
@@ -389,8 +474,23 @@
       flex-direction: column;
     }
 
-    .opportunity-card h3 { color: #123b67; margin-top: 0; }
-    .opportunity-card p { font-size: 14px; }
+    .resource-card h3 { color: #123b67; margin-top: 0; }
+    .resource-card p { font-size: 14px; color: #53647a; }
+
+    .resource-card a {
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      background: #1769aa;
+      color: white;
+      padding: 11px 15px;
+      border-radius: 7px;
+      margin-top: auto;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .resource-card a:hover { background: #0e4d82; }
 
     .disclosure { font-size: 12px; color: #65748a; }
 
@@ -413,6 +513,7 @@
       box-shadow: 0 3px 13px rgba(20,50,80,.06);
     }
 
+    .submit-section h2 { color: #123b67; margin-top: 0; }
     .submit-section p { color: #53647a; line-height: 1.6; }
 
     footer {
@@ -453,7 +554,7 @@
       .content-panel { padding: 22px; }
       .logo { font-size: 21px; }
     }
-  </style> <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  </style>
 </head>
 
 <body>
@@ -463,7 +564,8 @@
     <a href="#" class="logo">🌍 Opportunity Bridge</a>
     <div class="nav-links">
       <a href="#opportunities">Opportunities</a>
-      <a href="#scholarships">Scholarships</a>
+      <a href="scholarships.html">Scholarships</a>
+      <a href="#jobs">Jobs</a>
       <a href="#career-support">Career Support</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
@@ -480,7 +582,7 @@
       <p class="hero-text">Your gateway to global scholarships, grants, internships, jobs and free online courses. Find opportunities that can help you learn, grow and move forward.</p>
       <div class="hero-actions">
         <a href="#opportunities" class="hero-primary">Explore Opportunities →</a>
-        <a href="#scholarships" class="hero-secondary">Find Scholarships</a>
+        <a href="scholarships.html" class="hero-secondary">Find Scholarships</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -501,10 +603,57 @@
 
 <main>
 
-<section id="opportunities">
-  <div class="section-heading">
+<!-- 1. EXPLORE OPPORTUNITIES CATEGORY HUB -->
+<section id="opportunities" class="hub-section">
+  <div class="section-heading centered">
     <h2>Explore Opportunities</h2>
-    <p>Discover opportunities to study, develop skills, start your career and build your future.</p>
+    <p>Discover opportunities to learn, work and grow.</p>
+  </div>
+
+  <div class="opportunity-grid">
+    <div class="opportunity-card">
+      <h3>🎓 Scholarships</h3>
+      <p>Find local and international scholarships to support your education.</p>
+      <a href="scholarships.html">Explore Scholarships</a>
+    </div>
+
+    <div class="opportunity-card">
+      <h3>💼 Jobs</h3>
+      <p>Discover job openings, remote work and career opportunities.</p>
+      <a href="#jobs">Explore Jobs</a>
+    </div>
+
+    <div class="opportunity-card">
+      <h3>🚀 Internships</h3>
+      <p>Find internships and gain valuable work experience.</p>
+      <a href="#live-directory" onclick="quickFilter('Internship')">Explore Internships</a>
+    </div>
+
+    <div class="opportunity-card">
+      <h3>💡 Grants</h3>
+      <p>Discover funding opportunities for education, business and projects.</p>
+      <a href="#live-directory" onclick="quickFilter('Grant')">Explore Grants</a>
+    </div>
+
+    <div class="opportunity-card">
+      <h3>📚 Free Online Courses</h3>
+      <p>Build new skills through free online learning programmes.</p>
+      <a href="#live-directory" onclick="quickFilter('Free Course')">Explore Courses</a>
+    </div>
+
+    <div class="opportunity-card">
+      <h3>🏆 Competitions</h3>
+      <p>Find competitions, challenges and programmes to showcase your skills.</p>
+      <a href="#live-directory" onclick="quickFilter('Competition')">Explore Competitions</a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. LIVE SEARCHABLE & FILTERABLE OPPORTUNITY DIRECTORY -->
+<section id="live-directory" class="directory-section">
+  <div class="section-heading">
+    <h2>Live Opportunity Directory</h2>
+    <p>Filter verified scholarships, grants, internships, jobs and free online courses by category or country.</p>
   </div>
 
   <div class="filters">
@@ -526,12 +675,43 @@
       <option value="United Kingdom">United Kingdom</option>
       <option value="Canada">Canada</option>
     </select>
+
+    <button id="resetFilters" type="button" class="reset-button" style="display: none;">Reset Filters</button>
   </div>
 
   <p id="loadStatus" aria-live="polite">Loading opportunities...</p>
   <div id="results" class="cards"></div>
 </section>
 
+<!-- 3. LATEST JOB OPPORTUNITIES -->
+<section id="jobs" class="hub-section">
+  <div class="section-heading centered">
+    <h2>Latest Job Opportunities</h2>
+    <p>Explore job openings from different countries and organisations.</p>
+  </div>
+
+  <div class="opportunity-grid">
+    <div class="opportunity-card">
+      <h3>Remote Jobs</h3>
+      <p>Discover remote job opportunities from around the world.</p>
+      <a href="https://www.remoteok.com/" target="_blank" rel="noopener noreferrer">Find Remote Jobs</a>
+    </div>
+
+    <div class="opportunity-card">
+      <h3>UN Careers</h3>
+      <p>Explore career opportunities with the United Nations.</p>
+      <a href="https://careers.un.org/" target="_blank" rel="noopener noreferrer">View UN Jobs</a>
+    </div>
+
+    <div class="opportunity-card">
+      <h3>LinkedIn Jobs</h3>
+      <p>Search for job vacancies across different industries.</p>
+      <a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer">Search Jobs</a>
+    </div>
+  </div>
+</section>
+
+<!-- 4. FEATURED SCHOLARSHIPS FOR 2027 -->
 <section id="scholarships" class="scholarship-section">
   <div class="section-heading">
     <h2>🎓 Featured Scholarships for 2027</h2>
@@ -576,12 +756,13 @@
   </div>
 </section>
 
+<!-- 5. SCHOLARSHIP & CAREER GUIDES -->
 <section id="learning-guides" class="content-section">
   <div class="content-panel">
     <h2>📚 Scholarship & Career Guides</h2>
     <p>Learn how to find legitimate opportunities, prepare strong applications and improve your career.</p>
     <div class="resource-grid">
-      <article class="opportunity-card">
+      <article class="resource-card">
         <h3>How to Find International Scholarships</h3>
         <p>Learn where to search, how to check eligibility and how to prepare your application.</p>
         <a href="scholarship-guide.html">Read the Complete Guide →</a>
@@ -590,6 +771,7 @@
   </div>
 </section>
 
+<!-- 6. CAREER SUPPORT RESOURCES -->
 <section id="career-support" class="content-section">
   <div class="content-panel">
     <h2>💼 Career Support Resources</h2>
@@ -597,25 +779,25 @@
     <p class="disclosure">Some links in this section are affiliate links. We may earn a commission from qualifying purchases at no extra cost to you.</p>
 
     <div class="resource-grid">
-      <article class="opportunity-card">
+      <article class="resource-card">
         <h3>LinkedIn Profile Optimization</h3>
         <p>Improve your LinkedIn profile and present your skills professionally to recruiters.</p>
         <a href="https://go.fiverr.com/visit/?bta=1173802&brand=fiverrmarketplace&landingPage=https%253A%252F%252Fwww.fiverr.com%252Fsearch%252Fgigs%253Fquery%253DLinkedIn%252520Profile%252520Optimization" target="_blank" rel="nofollow sponsored noopener noreferrer">Explore LinkedIn Services</a>
       </article>
 
-      <article class="opportunity-card">
+      <article class="resource-card">
         <h3>Professional Cover Letter Writing</h3>
         <p>Find professionals who can help you prepare a cover letter for your job application.</p>
         <a href="https://go.fiverr.com/visit/?bta=1173802&brand=fiverrmarketplace&landingPage=https%253A%252F%252Fwww.fiverr.com%252Fsearch%252Fgigs%253Fquery%253DCover%252520Letter%252520Writing" target="_blank" rel="nofollow sponsored noopener noreferrer">Explore Cover Letter Services</a>
       </article>
 
-      <article class="opportunity-card">
+      <article class="resource-card">
         <h3>Interview Preparation</h3>
         <p>Explore interview coaching, practice questions and professional interview guidance.</p>
         <a href="https://go.fiverr.com/visit/?bta=1173802&brand=fiverrmarketplace&landingPage=https%253A%252F%252Fwww.fiverr.com%252Fsearch%252Fgigs%253Fquery%253DInterview%252520Preparation%252520Services" target="_blank" rel="nofollow sponsored noopener noreferrer">Explore Interview Services</a>
       </article>
 
-      <article class="opportunity-card">
+      <article class="resource-card">
         <h3>Professional Resume Writing</h3>
         <p>Find freelance professionals who can help you create or improve your CV and resume.</p>
         <a href="https://go.fiverr.com/visit/?bta=1173802&brand=fiverrmarketplace&landingPage=https%253A%252F%252Fwww.fiverr.com%252Fsearch%252Fgigs%253Fquery%253DResume%252520Writing" target="_blank" rel="nofollow sponsored noopener noreferrer">Explore Resume Services</a>
@@ -624,6 +806,7 @@
   </div>
 </section>
 
+<!-- 7. ABOUT & SUBMISSIONS -->
 <section id="about" class="content-section">
   <div class="content-panel">
     <h2>About Opportunity Bridge</h2>
@@ -631,364 +814,3 @@
     <p>Our mission is to make opportunities easier to discover and help people build a better future, regardless of where they come from.</p>
     <p>Our platform is free to use. We support its growth through clearly identified partnerships, sponsored listings, advertising and affiliate marketing.</p>
   </div>
-</section>
-
-<section class="submit-section">
-  <h2>Have an Opportunity to Share?</h2>
-  <p>Organisations, schools, companies and opportunity providers can submit scholarships, grants, internships, jobs and free courses for review.</p>
-  <a class="submit-button" href="https://forms.gle/WHiHb7F9pwdY1zmi7" target="_blank" rel="noopener noreferrer">Submit an Opportunity</a>
-</section>
-
-<section id="advertise" class="submit-section">
-  <h2>Advertise With Opportunity Bridge</h2>
-  <p>Are you an organisation, company or training provider? Promote your scholarships, jobs, internships, grants and training programmes to people around the world.</p>
-  <a class="submit-button" href="https://forms.gle/yD8N5q5LvPz44RweA" target="_blank" rel="noopener noreferrer">Advertise With Us</a>
-</section>
-
-<div class="notice">
-  <strong>Important:</strong> Always visit the official website to confirm eligibility, application deadlines and requirements. Opportunities may close or change. Opportunity Bridge does not guarantee selection or funding. Never pay an unknown person to secure a scholarship.
-</div>
-
-<section id="contact" class="submit-section">
-  <h2>Contact Opportunity Bridge</h2>
-  <p>Have a question, partnership proposal, advertising inquiry or feedback? We would love to hear from you.</p>
-  <p>Email: <a href="mailto:georgenjogu673@gmail.com">Contact Opportunity Bridge</a></p>
-  <a class="submit-button" href="https://forms.gle/WHiHb7F9pwdY1zmi7" target="_blank" rel="noopener noreferrer">Submit an Opportunity</a>
-</section>
-
-</main>
-
-<footer>
-  <p><strong>🌍 Opportunity Bridge</strong></p>
-  <p>Discover opportunities. Unlock your future.</p>
-  <p>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms & Conditions</a>
-    <a href="disclaimer.html">Disclaimer</a>
-  </p>
-  <p>© 2026 Opportunity Bridge. All rights reserved.</p>
-</footer>
-
-<script>
-  const starterOpportunities = [
-    {
-      title: "Explore Global Scholarships",
-      category: "Scholarship",
-      country: "Global",
-      description: "Discover educational funding opportunities around the world.",
-      link: "https://www.scholarshipportal.com/"
-    },
-    {
-      title: "World Bank Scholarships",
-      category: "Scholarship",
-      country: "Global",
-      description: "Explore scholarship information and education opportunities.",
-      link: "https://www.worldbank.org/en/programs/scholarships"
-    },
-    {
-      title: "Google Free Courses",
-      category: "Free Course",
-      country: "Global",
-      description: "Develop digital and professional skills through online learning.",
-      link: "https://grow.google/"
-    },
-    {
-      title: "UN Careers and Internships",
-      category: "Internship",
-      country: "Global",
-      description: "Explore career opportunities and internships with the United Nations.",
-      link: "https://careers.un.org/"
-    },
-    {
-      title: "Government of Canada Scholarships",
-      category: "Scholarship",
-      country: "Canada",
-      description: "Find information about scholarships for international students.",
-      link: "https://www.educanada.ca/scholarships-bourses/index.aspx?lang=eng"
-    },
-    {
-      title: "UK Government Scholarships",
-      category: "Scholarship",
-      country: "United Kingdom",
-      description: "Explore UK scholarship information through the Chevening programme.",
-      link: "https://www.chevening.org/"
-    },
-    {
-      title: "Kenya Government Opportunities",
-      category: "Grant",
-      country: "Kenya",
-      description: "Explore youth initiatives and government employment information in Kenya.",
-      link: "https://www.labourmarket.go.ke/youth-initiatives/"
-    },
-    {
-      title: "USA Fulbright Program",
-      category: "Scholarship",
-      country: "United States",
-      description: "Explore international educational exchange opportunities.",
-      link: "https://fulbrightprogram.org/"
-    }
-  ];
-
-  const GOOGLE_SHEET_URL =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6X1KjNwmGhNFVpkAEeQIf3jxOpDeXML4e1tftya-0AGtkgcwIQtVy0WElZTSwIH3qIapUVoFBKmAv/pub?gid=1040139166&single=true&output=csv";
-
-  let opportunities = [...starterOpportunities];
-
-  function parseCSV(text) {
-    const rows = [];
-    let row = [];
-    let value = "";
-    let insideQuotes = false;
-
-    for (let i = 0; i < text.length; i++) {
-      const char = text[i];
-      const next = text[i + 1];
-
-      if (char === '"' && insideQuotes && next === '"') {
-        value += '"';
-        i++;
-      } else if (char === '"') {
-        insideQuotes = !insideQuotes;
-      } else if (char === "," && !insideQuotes) {
-        row.push(value);
-        value = "";
-      } else if ((char === "\n" || char === "\r") && !insideQuotes) {
-        if (char === "\r" && next === "\n") i++;
-        row.push(value);
-
-        if (row.some(cell => cell.trim() !== "")) rows.push(row);
-
-        row = [];
-        value = "";
-      } else {
-        value += char;
-      }
-    }
-
-    row.push(value);
-    if (row.some(cell => cell.trim() !== "")) rows.push(row);
-
-    return rows;
-  }
-
-  function clean(value) {
-    return String(value || "").trim();
-  }
-
-  function normaliseHeader(value) {
-    return clean(value).toLowerCase().replace(/[^a-z0-9]/g, "");
-  }
-
-  function findColumn(headers, possibleNames) {
-    return headers.findIndex(header =>
-      possibleNames.includes(normaliseHeader(header))
-    );
-  }
-
-  function isSafeLink(link) {
-    try {
-      const url = new URL(link);
-      return url.protocol === "https:" || url.protocol === "http:";
-    } catch {
-      return false;
-    }
-  }
-
-  // ONLY APPROVED SPREADSHEET SUBMISSIONS ARE DISPLAYED
-  function convertSheetRows(csvText) {
-    const rows = parseCSV(csvText.replace(/^\uFEFF/, ""));
-
-    if (rows.length < 2) return [];
-
-    const headers = rows[0];
-
-    const titleColumn = findColumn(headers, ["title", "opportunitytitle"]);
-    const categoryColumn = findColumn(headers, ["category", "opportunitycategory"]);
-    const countryColumn = findColumn(headers, ["country", "eligiblecountry", "eligiblecountries"]);
-    const descriptionColumn = findColumn(headers, ["description", "opportunitydescription"]);
-    const linkColumn = findColumn(headers, ["officiallink", "officialapplicationlink", "link", "website"]);
-    const deadlineColumn = findColumn(headers, ["deadline", "applicationdeadline"]);
-    const statusColumn = findColumn(headers, ["reviewstatus"]);
-
-    if (titleColumn === -1 || linkColumn === -1 || statusColumn === -1) {
-      console.error("Required spreadsheet columns are missing. Check that the sheet has Title, Official Link and Review Status headings.");
-      return [];
-    }
-
-    return rows.slice(1).map(row => {
-      const get = index => index === -1 ? "" : clean(row[index]);
-
-      return {
-        title: get(titleColumn),
-        category: get(categoryColumn) || "Other",
-        country: get(countryColumn) || "Global",
-        description: get(descriptionColumn),
-        link: get(linkColumn),
-        deadline: get(deadlineColumn),
-        reviewStatus: get(statusColumn).toLowerCase()
-      };
-    }).filter(item =>
-      item.title &&
-      item.reviewStatus === "approved" &&
-      isSafeLink(item.link)
-    );
-  }
-
-  // Featured opportunities remain visible.
-  // Approved spreadsheet entries are added to them.
-  function mergeOpportunities(sheetItems) {
-    const merged = new Map();
-
-    starterOpportunities.forEach(item => {
-      merged.set(item.title.toLowerCase().trim(), item);
-    });
-
-    sheetItems.forEach(item => {
-      const key = item.title.toLowerCase().trim();
-      merged.set(key, item);
-    });
-
-    opportunities = Array.from(merged.values());
-  }
-
-  function showOpportunities() {
-    const term = clean(document.getElementById("search").value).toLowerCase();
-    const category = document.getElementById("category").value;
-    const country = document.getElementById("country").value;
-
-    const filtered = opportunities.filter(item => {
-      const searchableText = [
-        item.title,
-        item.description,
-        item.category,
-        item.country,
-        item.deadline || ""
-      ].join(" ").toLowerCase();
-
-      const matchesSearch = searchableText.includes(term);
-
-      const matchesCategory =
-        !category ||
-        item.category.toLowerCase() === category.toLowerCase();
-
-      const countries = item.country
-        .split(/[,;]/)
-        .map(value => value.trim().toLowerCase());
-
-      let matchesCountry = true;
-
-      if (country === "Global") {
-        matchesCountry = countries.includes("global");
-      } else if (country) {
-        matchesCountry =
-          countries.includes("global") ||
-          countries.some(value => value.includes(country.toLowerCase()));
-      }
-
-      return matchesSearch && matchesCategory && matchesCountry;
-    });
-
-    const results = document.getElementById("results");
-    results.replaceChildren();
-
-    if (!filtered.length) {
-      const empty = document.createElement("div");
-      empty.className = "empty";
-      empty.textContent = "No matching opportunities found. Try another search or filter.";
-      results.appendChild(empty);
-      return;
-    }
-
-    filtered.forEach(item => {
-      const card = document.createElement("article");
-      card.className = "card";
-
-      const tag = document.createElement("span");
-      tag.className = "tag";
-      tag.textContent = item.category;
-
-      const title = document.createElement("h3");
-      title.textContent = item.title;
-
-      const location = document.createElement("p");
-      const locationStrong = document.createElement("strong");
-      locationStrong.textContent = "Location: ";
-      location.append(locationStrong, document.createTextNode(item.country));
-
-      const description = document.createElement("p");
-      description.textContent =
-        item.description || "Visit the official website for more information.";
-
-      card.append(tag, title, location, description);
-
-      if (item.deadline) {
-        const deadline = document.createElement("p");
-        deadline.className = "deadline";
-
-        const deadlineStrong = document.createElement("strong");
-        deadlineStrong.textContent = "Deadline: ";
-
-        deadline.append(deadlineStrong, document.createTextNode(item.deadline));
-        card.appendChild(deadline);
-      }
-
-      const link = document.createElement("a");
-      link.href = item.link;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "Visit Official Website ↗";
-
-      card.appendChild(link);
-      results.appendChild(card);
-    });
-  }
-
-  async function loadPublishedOpportunities() {
-    const status = document.getElementById("loadStatus");
-
-    try {
-      const response = await fetch(GOOGLE_SHEET_URL, {
-        cache: "no-store"
-      });
-
-      if (!response.ok) {
-        throw new Error("Could not load the published spreadsheet.");
-      }
-
-      const csvText = await response.text();
-
-      if (csvText.trim().startsWith("<")) {
-        throw new Error("The spreadsheet did not return CSV data.");
-      }
-
-      const sheetItems = convertSheetRows(csvText);
-
-      mergeOpportunities(sheetItems);
-      showOpportunities();
-
-      status.textContent = sheetItems.length
-        ? "Featured opportunities and " + sheetItems.length + " approved submissions loaded."
-        : "Showing featured opportunities. New approved listings will appear here when published.";
-
-    } catch (error) {
-      console.error("Google Sheets loading error:", error);
-
-      opportunities = [...starterOpportunities];
-      showOpportunities();
-
-      status.textContent =
-        "Showing featured opportunities. Published submissions could not be loaded right now.";
-    }
-  }
-
-  document.getElementById("search").addEventListener("input", showOpportunities);
-  document.getElementById("searchButton").addEventListener("click", showOpportunities);
-  document.getElementById("category").addEventListener("change", showOpportunities);
-  document.getElementById("country").addEventListener("change", showOpportunities);
-
-  showOpportunities();
-  loadPublishedOpportunities();
-</script>
-
-</body>
-</html>
