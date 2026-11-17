@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,11 +177,30 @@ function safeLink(value) {
   }
 }
 
+// Automatically check if a job/internship deadline string has passed
+function isExpired(deadlineStr) {
+  if (!deadlineStr || deadlineStr.toLowerCase().includes("varies") || deadlineStr.toLowerCase().includes("ongoing") || deadlineStr.toLowerCase().includes("rolling")) {
+    return false; // Keep open-ended or rolling deadlines
+  }
+  
+  const parsedDate = new Date(deadlineStr);
+  if (isNaN(parsedDate)) return false; // If date string is unrecognized, keep it safe
+
+  // Expire at the end of the deadline day (23:59:59)
+  parsedDate.setHours(23, 59, 59, 999);
+  
+  const now = new Date();
+  return now > parsedDate;
+}
+
 function render() {
   const term = search.value.toLowerCase().trim();
   const selected = category.value;
 
-  const filtered = opportunities.filter(item => {
+  // Filter out expired items dynamically on render
+  const activeOpportunities = opportunities.filter(item => !isExpired(item.deadline));
+
+  const filtered = activeOpportunities.filter(item => {
     const matchesSearch =
       `${item.title} ${item.country} ${item.description} ${item.category}`
         .toLowerCase().includes(term);
@@ -196,11 +214,11 @@ function render() {
   listings.innerHTML = "";
 
   if (!filtered.length) {
-    message.textContent = "No approved jobs or internships found yet. Please check again soon.";
+    message.textContent = "No approved active jobs or internships found matching your search.";
     return;
   }
 
-  message.textContent = `Found ${filtered.length} opportunity${filtered.length === 1 ? "" : "ies"}.`;
+  message.textContent = `Found ${filtered.length} active opportunity${filtered.length === 1 ? "" : "ies"}.`;
 
   filtered.forEach(item => {
     const card = document.createElement("article");
@@ -267,7 +285,8 @@ async function loadOpportunities() {
       item.link &&
       item.status === "approved" &&
       (item.category.toLowerCase().includes("job") ||
-       item.category.toLowerCase().includes("internship"))
+       item.category.toLowerCase().includes("internship")) &&
+      !isExpired(item.deadline) // Automatically strip expired items on load
     );
 
     render();
