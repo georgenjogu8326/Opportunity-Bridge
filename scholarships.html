@@ -279,6 +279,23 @@
   function norm(val) { return clean(val).toLowerCase().replace(/[^a-z0-9]/g, ""); }
   function findCol(headers, names) { return headers.findIndex(h => names.includes(norm(h))); }
 
+  // Automatically check if a deadline string has passed (returns true if expired)
+  function isExpired(deadlineStr) {
+    if (!deadlineStr || deadlineStr.toLowerCase().includes("varies") || deadlineStr.toLowerCase().includes("ongoing")) {
+      return false; // Keep it if deadline is flexible or varies
+    }
+    
+    // Parse common date patterns like "18 November 2026" or standard JS parsable dates
+    const parsedDate = new Date(deadlineStr);
+    if (isNaN(parsedDate)) return false; // If date format is unrecognized, keep it safe
+
+    // Set time to end of deadline day (e.g., 23:59:59) so it expires after the day is over
+    parsedDate.setHours(23, 59, 59, 999);
+    
+    const now = new Date();
+    return now > parsedDate;
+  }
+
   function convertSheetRows(csvText) {
     const rows = parseCSV(csvText.replace(/^\uFEFF/, ""));
     if (rows.length < 2) return [];
@@ -304,14 +321,17 @@
         link: get(linkCol),
         status: get(statCol).toLowerCase()
       };
-    }).filter(item => item.title && (item.status === "approved" || item.status === ""));
+    }).filter(item => item.title && (item.status === "approved" || item.status === "") && !isExpired(item.deadline));
   }
 
   function showScholarships() {
     const term = clean(document.getElementById("search").value).toLowerCase();
     const country = document.getElementById("country").value;
 
-    const filtered = scholarships.filter(item => {
+    // Filter out expired items dynamically as well
+    const activeScholarships = scholarships.filter(item => !isExpired(item.deadline));
+
+    const filtered = activeScholarships.filter(item => {
       const text = [item.title, item.description, item.country, item.deadline || ""].join(" ").toLowerCase();
       const matchSearch = text.includes(term);
       const matchCountry = !country || item.country.toLowerCase().includes(country.toLowerCase()) || item.country.toLowerCase() === "global";
@@ -376,13 +396,17 @@
       
       if (sheetItems.length) {
         const map = new Map();
-        starterScholarships.forEach(s => map.set(s.title.toLowerCase(), s));
+        starterScholarships.forEach(s => {
+          if (!isExpired(s.deadline)) map.set(s.title.toLowerCase(), s);
+        });
         sheetItems.forEach(s => map.set(s.title.toLowerCase(), s));
         scholarships = Array.from(map.values());
       }
       showScholarships();
       status.textContent = "Showing verified scholarships.";
     } catch {
+      // Filter starter list to exclude expired items even if fetch fails
+      scholarships = starterScholarships.filter(s => !isExpired(s.deadline));
       showScholarships();
       status.textContent = "Showing featured scholarships.";
     }
