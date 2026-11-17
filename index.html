@@ -986,6 +986,20 @@
     }
   }
 
+  // Automatically check if a deadline string has passed
+  function isExpired(deadlineStr) {
+    if (!deadlineStr || deadlineStr.toLowerCase().includes("varies") || deadlineStr.toLowerCase().includes("ongoing") || deadlineStr.toLowerCase().includes("rolling")) {
+      return false; // Keep open-ended or rolling opportunities
+    }
+    
+    const parsedDate = new Date(deadlineStr);
+    if (isNaN(parsedDate)) return false; // If date format is unrecognized, keep it safe
+
+    parsedDate.setHours(23, 59, 59, 999);
+    const now = new Date();
+    return now > parsedDate;
+  }
+
   function convertSheetRows(csvText) {
     const rows = parseCSV(csvText.replace(/^\uFEFF/, ""));
 
@@ -997,250 +1011,141 @@
     const categoryColumn = findColumn(headers, ["category", "opportunitycategory"]);
     const countryColumn = findColumn(headers, ["country", "eligiblecountry", "eligiblecountries"]);
     const descriptionColumn = findColumn(headers, ["description", "opportunitydescription"]);
-    const linkColumn = findColumn(headers, ["officiallink", "officialapplicationlink", "link", "website"]);
+    const linkColumn = findColumn(headers, ["officiallink", "link", "website"]);
     const deadlineColumn = findColumn(headers, ["deadline", "applicationdeadline"]);
     const statusColumn = findColumn(headers, ["reviewstatus"]);
 
-    if (titleColumn === -1 || linkColumn === -1 || statusColumn === -1) {
-      console.error("Required spreadsheet columns are missing.");
-      return [];
-    }
+    if (titleColumn === -1 || linkColumn === -1) return [];
 
     return rows.slice(1).map(row => {
-      const get = index => index === -1 ? "" : clean(row[index]);
-
+      const get = idx => idx === -1 ? "" : clean(row[idx]);
       return {
         title: get(titleColumn),
-        category: get(categoryColumn) || "Other",
+        category: get(categoryColumn) || "Opportunity",
         country: get(countryColumn) || "Global",
         description: get(descriptionColumn),
-        link: get(linkColumn),
         deadline: get(deadlineColumn),
-        reviewStatus: get(statusColumn).toLowerCase()
+        link: get(linkColumn),
+        status: get(statusColumn).toLowerCase()
       };
-    }).filter(item =>
-      item.title &&
-      item.reviewStatus === "approved" &&
-      isSafeLink(item.link)
-    );
+    }).filter(item => item.title && (item.status === "approved" || item.status === "") && !isExpired(item.deadline));
   }
 
-  function mergeOpportunities(sheetItems) {
-    const merged = new Map();
-
-    starterOpportunities.forEach(item => {
-      merged.set(item.title.toLowerCase().trim(), item);
-    });
-
-    sheetItems.forEach(item => {
-      const key = item.title.toLowerCase().trim();
-      merged.set(key, item);
-    });
-
-    opportunities = Array.from(merged.values());
-  }
-
-  function quickFilter(categoryName) {
-    document.getElementById("search").value = "";
-    document.getElementById("country").value = "";
-    document.getElementById("category").value = categoryName;
-    showOpportunities();
-  }
-
-  function applyUrlFilters() {
-    const params = new URLSearchParams(window.location.search);
-    const q = params.get("q");
-    const cat = params.get("category");
-    const ctry = params.get("country");
-    let hasParam = false;
-
-    if (q) {
-      document.getElementById("search").value = q;
-      hasParam = true;
-    }
-
-    if (cat) {
-      const catSelect = document.getElementById("category");
-      for (const opt of catSelect.options) {
-        if (opt.value.toLowerCase() === cat.toLowerCase()) {
-          catSelect.value = opt.value;
-          hasParam = true;
-          break;
-        }
-      }
-    }
-
-    if (ctry) {
-      const ctrySelect = document.getElementById("country");
-      for (const opt of ctrySelect.options) {
-        if (opt.value.toLowerCase() === ctry.toLowerCase()) {
-          ctrySelect.value = opt.value;
-          hasParam = true;
-          break;
-        }
-      }
-    }
-
-    if (hasParam) {
-      const target = document.getElementById("live-directory");
-      if (target) target.scrollIntoView({ behavior: "smooth" });
-    }
-  }
-
-  function showOpportunities() {
-    const term = clean(document.getElementById("search").value).toLowerCase();
-    const category = document.getElementById("category").value;
-    const country = document.getElementById("country").value;
-
-    const resetBtn = document.getElementById("resetFilters");
-    resetBtn.style.display = (term || category || country) ? "inline-block" : "none";
-
-    const filtered = opportunities.filter(item => {
-      const searchableText = [
-        item.title,
-        item.description,
-        item.category,
-        item.country,
-        item.deadline || ""
-      ].join(" ").toLowerCase();
-
-      const matchesSearch = searchableText.includes(term);
-
-      const matchesCategory =
-        !category ||
-        item.category.toLowerCase() === category.toLowerCase();
-
-      const countries = item.country
-        .split(/[,;]/)
-        .map(value => value.trim().toLowerCase());
-
-      let matchesCountry = true;
-
-      if (country === "Global") {
-        matchesCountry = countries.includes("global");
-      } else if (country) {
-        matchesCountry =
-          countries.includes("global") ||
-          countries.some(value => value.includes(country.toLowerCase()));
-      }
-
-      return matchesSearch && matchesCategory && matchesCountry;
-    });
-
+  // Render directory search results
+  function renderDirectory(itemsToRender) {
     const results = document.getElementById("results");
     results.replaceChildren();
 
-    if (!filtered.length) {
+    if (!itemsToRender.length) {
       const empty = document.createElement("div");
       empty.className = "empty";
-      empty.textContent = "No matching opportunities found. Try another search or click Reset Filters.";
+      empty.textContent = "No active opportunities found matching your search.";
       results.appendChild(empty);
       return;
     }
 
-    filtered.forEach(item => {
+    itemsToRender.forEach(item => {
       const card = document.createElement("article");
       card.className = "card";
 
       const tag = document.createElement("span");
       tag.className = "tag";
-      tag.textContent = item.category;
+      tag.textContent = item.category || "Opportunity";
 
       const title = document.createElement("h3");
       title.textContent = item.title;
 
-      const location = document.createElement("p");
-      const locationStrong = document.createElement("strong");
-      locationStrong.textContent = "Location: ";
-      location.append(locationStrong, document.createTextNode(item.country));
+      const desc = document.createElement("p");
+      desc.textContent = item.description || "Discover more details on the official website.";
 
-      const description = document.createElement("p");
-      description.textContent =
-        item.description || "Visit the official website for more information.";
-
-      card.append(tag, title, location, description);
+      card.append(tag, title, desc);
 
       if (item.deadline) {
-        const deadline = document.createElement("p");
-        deadline.className = "deadline";
-
-        const deadlineStrong = document.createElement("strong");
-        deadlineStrong.textContent = "Deadline: ";
-
-        deadline.append(deadlineStrong, document.createTextNode(item.deadline));
-        card.appendChild(deadline);
+        const dead = document.createElement("p");
+        dead.className = "deadline";
+        dead.innerHTML = `<strong>Deadline:</strong> ${item.deadline}`;
+        card.appendChild(dead);
       }
 
       const link = document.createElement("a");
-      link.href = item.link;
+      link.href = isSafeLink(item.link) ? item.link : "#";
       link.target = "_blank";
       link.rel = "noopener noreferrer";
-      link.textContent = "Visit Official Website ↗";
+      link.textContent = "View Opportunity ↗";
 
       card.appendChild(link);
       results.appendChild(card);
     });
   }
 
-  function resetAllFilters() {
+  function filterOpportunities() {
+    const term = clean(document.getElementById("search").value).toLowerCase();
+    const category = document.getElementById("category").value.toLowerCase();
+    const country = document.getElementById("country").value.toLowerCase();
+
+    // Filter out any expired items dynamically
+    const activeList = opportunities.filter(item => !isExpired(item.deadline));
+
+    const filtered = activeList.filter(item => {
+      const text = [item.title, item.description, item.country, item.category, item.deadline || ""].join(" ").toLowerCase();
+      const matchSearch = !term || text.includes(term);
+      const matchCategory = !category || item.category.toLowerCase().includes(category);
+      const matchCountry = !country || item.country.toLowerCase().includes(country) || item.country.toLowerCase() === "global";
+      return matchSearch && matchCategory && matchCountry;
+    });
+
+    renderDirectory(filtered);
+
+    const resetBtn = document.getElementById("resetFilters");
+    if (term || category || country) {
+      resetBtn.style.display = "inline-block";
+    } else {
+      resetBtn.style.display = "none";
+    }
+  }
+
+  function quickFilter(categoryName) {
+    document.getElementById("category").value = categoryName;
+    filterOpportunities();
+  }
+
+  async function loadData() {
+    const status = document.getElementById("loadStatus");
+    try {
+      const res = await fetch(GOOGLE_SHEET_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error();
+      const csv = await res.text();
+      const sheetItems = convertSheetRows(csv);
+
+      if (sheetItems.length) {
+        const map = new Map();
+        starterOpportunities.forEach(s => {
+          if (!isExpired(s.deadline)) map.set(s.title.toLowerCase(), s);
+        });
+        sheetItems.forEach(s => map.set(s.title.toLowerCase(), s));
+        opportunities = Array.from(map.values());
+      }
+      filterOpportunities();
+      status.textContent = "Showing verified opportunities.";
+    } catch {
+      opportunities = starterOpportunities.filter(s => !isExpired(s.deadline));
+      filterOpportunities();
+      status.textContent = "Showing featured opportunities.";
+    }
+  }
+
+  document.getElementById("search").addEventListener("input", filterOpportunities);
+  document.getElementById("category").addEventListener("change", filterOpportunities);
+  document.getElementById("country").addEventListener("change", filterOpportunities);
+  
+  document.getElementById("resetFilters").addEventListener("click", () => {
     document.getElementById("search").value = "";
     document.getElementById("category").value = "";
     document.getElementById("country").value = "";
-    if (window.location.search) {
-      window.history.replaceState({}, "", window.location.pathname);
-    }
-    showOpportunities();
-  }
-
-  async function loadPublishedOpportunities() {
-    const status = document.getElementById("loadStatus");
-
-    try {
-      const response = await fetch(GOOGLE_SHEET_URL, {
-        cache: "no-store"
-      });
-
-      if (!response.ok) {
-        throw new Error("Could not load the published spreadsheet.");
-      }
-
-      const csvText = await response.text();
-
-      if (csvText.trim().startsWith("<")) {
-        throw new Error("The spreadsheet did not return CSV data.");
-      }
-
-      const sheetItems = convertSheetRows(csvText);
-
-      mergeOpportunities(sheetItems);
-      showOpportunities();
-
-      status.textContent = sheetItems.length
-        ? "Featured opportunities and " + sheetItems.length + " approved submissions loaded."
-        : "Showing featured opportunities. New approved listings will appear here when published.";
-
-    } catch (error) {
-      console.error("Google Sheets loading error:", error);
-
-      opportunities = [...starterOpportunities];
-      showOpportunities();
-
-      status.textContent =
-        "Showing featured opportunities. Published submissions will appear here once available.";
-    }
-  }
-
-  document.getElementById("search").addEventListener("input", showOpportunities);
-  document.getElementById("searchButton").addEventListener("click", () => {
-    showOpportunities();
-    document.getElementById("live-directory").scrollIntoView({ behavior: "smooth" });
+    filterOpportunities();
   });
-  document.getElementById("category").addEventListener("change", showOpportunities);
-  document.getElementById("country").addEventListener("change", showOpportunities);
-  document.getElementById("resetFilters").addEventListener("click", resetAllFilters);
 
-  applyUrlFilters();
-  loadPublishedOpportunities();
+  loadData();
 </script>
 
 </body>
