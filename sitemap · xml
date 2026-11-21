@@ -2,23 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://opportunity-bridge.pages.dev/</loc>
-    <lastmod>2026-11-18</lastmod>
+    <lastmod>2026-11-21</lastmod>
   </url>
   <url>
     <loc>https://opportunity-bridge.pages.dev/scholarships</loc>
-    <lastmod>2026-11-18</lastmod>
+    <lastmod>2026-11-21</lastmod>
+  </url>
+  <url>
+    <loc>https://opportunity-bridge.pages.dev/jobs</loc>
+    <lastmod>2026-11-21</lastmod>
   </url>
   <url>
     <loc>https://opportunity-bridge.pages.dev/scholarship-guide</loc>
-    <lastmod>2026-11-18</lastmod>
+    <lastmod>2026-11-21</lastmod>
   </url>
   <url>
     <loc>https://opportunity-bridge.pages.dev/privacy</loc>
+    <lastmod>2026-11-21</lastmod>
   </url>
   <url>
     <loc>https://opportunity-bridge.pages.dev/terms</loc>
+    <lastmod>2026-11-21</lastmod>
   </url>
   <url>
     <loc>https://opportunity-bridge.pages.dev/disclaimer</loc>
+    <lastmod>2026-11-21</lastmod>
   </url>
 </urlset>
