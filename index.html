@@ -24,21 +24,7 @@
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-  <style> .card.sponsored-card {
-      border: 2px solid #f4bd4f;
-      background: linear-gradient(180deg, #fffdf7 0%, #ffffff 35%);
-    }
-
-    .sponsored-badge {
-      display: inline-block;
-      background: #102e55;
-      color: #ffd16b;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 0.3px;
-    }
+  <style>
     * { box-sizing: border-box; scroll-behavior: smooth; }
 
     body {
@@ -373,6 +359,23 @@
       display: flex;
       flex-direction: column;
       border: 1px solid #e8edf4;
+    }
+
+    /* Sponsored Listing Tier */
+    .card.sponsored-card {
+      border: 2px solid #f4bd4f;
+      background: linear-gradient(180deg, #fffdf7 0%, #ffffff 35%);
+    }
+
+    .sponsored-badge {
+      display: inline-block;
+      background: #102e55;
+      color: #ffd16b;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.3px;
     }
 
     .card h3 { margin: 12px 0 8px; line-height: 1.4; color: #123b67; }
@@ -1091,7 +1094,9 @@
       country: "Global",
       description: "Discover educational funding opportunities around the world.",
       deadline: "Ongoing",
-      link: "https://www.scholarshipportal.com/"
+      link: "https://www.scholarshipportal.com/",
+      sponsored: false,
+      sponsorName: ""
     },
     {
       title: "World Bank Scholarships",
@@ -1099,7 +1104,9 @@
       country: "Global",
       description: "Explore scholarship information and education opportunities.",
       deadline: "Varies",
-      link: "https://www.worldbank.org/en/programs/scholarships"
+      link: "https://www.worldbank.org/en/programs/scholarships",
+      sponsored: false,
+      sponsorName: ""
     },
     {
       title: "Google Free Courses",
@@ -1107,7 +1114,9 @@
       country: "Global",
       description: "Develop digital and professional skills through online learning.",
       deadline: "Ongoing",
-      link: "https://grow.google/"
+      link: "https://grow.google/",
+      sponsored: false,
+      sponsorName: ""
     },
     {
       title: "UN Careers and Internships",
@@ -1115,7 +1124,9 @@
       country: "Global",
       description: "Explore career opportunities and internships with the United Nations.",
       deadline: "Rolling",
-      link: "https://careers.un.org/"
+      link: "https://careers.un.org/",
+      sponsored: false,
+      sponsorName: ""
     },
     {
       title: "Government of Canada Scholarships",
@@ -1123,7 +1134,9 @@
       country: "Canada",
       description: "Find information about scholarships for international students.",
       deadline: "Varies",
-      link: "https://www.educanada.ca/scholarships-bourses/index.aspx?lang=eng"
+      link: "https://www.educanada.ca/scholarships-bourses/index.aspx?lang=eng",
+      sponsored: false,
+      sponsorName: ""
     },
     {
       title: "UK Government Scholarships",
@@ -1131,7 +1144,9 @@
       country: "United Kingdom",
       description: "Explore UK scholarship information through the Chevening programme.",
       deadline: "Varies",
-      link: "https://www.chevening.org/"
+      link: "https://www.chevening.org/",
+      sponsored: false,
+      sponsorName: ""
     },
     {
       title: "Kenya Government Opportunities",
@@ -1139,7 +1154,9 @@
       country: "Kenya",
       description: "Explore youth initiatives and government employment information in Kenya.",
       deadline: "Ongoing",
-      link: "https://www.labourmarket.go.ke/youth-initiatives/"
+      link: "https://www.labourmarket.go.ke/youth-initiatives/",
+      sponsored: false,
+      sponsorName: ""
     },
     {
       title: "USA Fulbright Program",
@@ -1147,15 +1164,18 @@
       country: "United States",
       description: "Explore international educational exchange opportunities.",
       deadline: "Varies",
-      link: "https://fulbrightprogram.org/"
+      link: "https://fulbrightprogram.org/",
+      sponsored: false,
+      sponsorName: ""
     }
   ];
 
   const GOOGLE_SHEET_URL =
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vT6X1KjNwmGhNFVpkAEeQIf3jxOpDeXML4e1tftya-0AGtkgcwIQtVy0WElZTSwIH3qIapUVoFBKmAv/pub?gid=1040139166&single=true&output=csv";
 
-  // Optional: Paste a deployed Google Apps Script Web App URL or Form endpoint here to persist alert sign-ups
+  // Optional: Paste deployed Google Apps Script Web App URLs here to persist sign-ups and click telemetry
   const ALERT_WEBHOOK_URL = "";
+  const TELEMETRY_WEBHOOK_URL = "";
 
   let opportunities = [...starterOpportunities];
 
@@ -1231,266 +1251,9 @@
     const raw = clean(deadlineStr);
     if (!raw || /varies|ongoing|rolling|open|tbd/i.test(raw)) return null;
 
-    // Extract ISO date or common date pattern if extra text like timezones is present
     const isoMatch = raw.match(/\b(\d{4}-\d{2}-\d{2})\b/);
     const candidate = isoMatch ? isoMatch[1] : raw;
     const parsed = new Date(candidate);
     if (isNaN(parsed.getTime())) return null;
 
     parsed.setHours(23, 59, 59, 999);
-    return parsed;
-  }
-
-  function isExpired(deadlineStr) {
-    const deadlineDate = parseDeadlineDate(deadlineStr);
-    if (!deadlineDate) return false;
-    return new Date() > deadlineDate;
-  }
-
-  // Returns days remaining or null if open-ended/unparsed
-  function getDaysRemaining(deadlineStr) {
-    const deadlineDate = parseDeadlineDate(deadlineStr);
-    if (!deadlineDate) return null;
-    const diffMs = deadlineDate.getTime() - Date.now();
-    return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-  }
-
-  // Maps days remaining to 30 / 14 / 3-day alert tiers
-  function getAlertTierLabel(deadlineStr) {
-    const days = getDaysRemaining(deadlineStr);
-    if (days === null || days < 0) return "";
-    if (days <= 3) return `🚨 3-Day Final Alert (${days}d left)`;
-    if (days <= 14) return `⏳ 14-Day Alert (${days}d left)`;
-    if (days <= 30) return `🔔 30-Day Alert (${days}d left)`;
-    return "";
-  }
-
-  function convertSheetRows(csvText) {
-    const rows = parseCSV(csvText.replace(/^\uFEFF/, ""));
-    if (rows.length < 2) return [];
-
-    const headers = rows[0];
-    const titleColumn = findColumn(headers, ["title", "opportunitytitle"]);
-    const categoryColumn = findColumn(headers, ["category", "opportunitycategory"]);
-    const countryColumn = findColumn(headers, ["country", "eligiblecountry", "eligiblecountries"]);
-    const descriptionColumn = findColumn(headers, ["description", "opportunitydescription"]);
-    const linkColumn = findColumn(headers, ["officiallink", "link", "website", "url"]);
-    const deadlineColumn = findColumn(headers, ["deadline", "applicationdeadline", "deadlinedate"]);
-    const statusColumn = findColumn(headers, ["reviewstatus", "status"]);
-
-    if (titleColumn === -1 || linkColumn === -1) return [];
-
-    return rows.slice(1)
-      .map(row => {
-        const get = idx => (idx === -1 ? "" : clean(row[idx]));
-        return {
-          title: get(titleColumn),
-          category: get(categoryColumn) || "Opportunity",
-          country: get(countryColumn) || "Global",
-          description: get(descriptionColumn),
-          link: get(linkColumn),
-          deadline: get(deadlineColumn),
-          status: get(statusColumn).toLowerCase()
-        };
-      })
-      .filter(item =>
-        item.title &&
-        isSafeLink(item.link) &&
-        (!item.status || item.status === "approved") &&
-        !isExpired(item.deadline)
-      );
-  }
-
-  function renderOpportunities() {
-    const query = clean(searchInput.value).toLowerCase();
-    const selectedCategory = categorySelect.value;
-    const selectedCountry = countrySelect.value;
-
-    const hasActiveFilter = Boolean(query || selectedCategory || selectedCountry);
-    resetFiltersButton.style.display = hasActiveFilter ? "inline-block" : "none";
-
-    const activeItems = opportunities.filter(item => !isExpired(item.deadline));
-
-    const filtered = activeItems.filter(item => {
-      const matchesCategory =
-        !selectedCategory || item.category.toLowerCase() === selectedCategory.toLowerCase();
-
-      const matchesCountry =
-        !selectedCountry ||
-        item.country.toLowerCase().includes(selectedCountry.toLowerCase()) ||
-        (selectedCountry === "Global" && item.country.toLowerCase() === "global");
-
-      const searchableText = `${item.title} ${item.category} ${item.country} ${item.description} ${item.deadline}`.toLowerCase();
-      const matchesQuery = !query || searchableText.includes(query);
-
-      return matchesCategory && matchesCountry && matchesQuery;
-    });
-
-    resultsContainer.innerHTML = "";
-
-    if (!filtered.length) {
-      resultsContainer.innerHTML = `<div class="empty">No matching opportunities found. Try clearing your filters or searching another keyword.</div>`;
-      return;
-    }
-
-    filtered.forEach(item => {
-      const card = document.createElement("article");
-      card.className = "card";
-
-      const badges = document.createElement("div");
-      badges.className = "card-badges";
-
-      const tag = document.createElement("span");
-      tag.className = "tag";
-      tag.textContent = `${item.category} · ${item.country}`;
-      badges.appendChild(tag);
-
-      const alertLabel = getAlertTierLabel(item.deadline);
-      if (alertLabel) {
-        const alertBadge = document.createElement("span");
-        alertBadge.className = "alert-badge";
-        alertBadge.textContent = alertLabel;
-        badges.appendChild(alertBadge);
-      }
-
-      const title = document.createElement("h3");
-      title.textContent = item.title;
-
-      const desc = document.createElement("p");
-      desc.textContent = item.description;
-
-      const deadline = document.createElement("p");
-      deadline.className = "deadline";
-      deadline.textContent = `Deadline: ${item.deadline || "Check official website"}`;
-
-      const link = document.createElement("a");
-      link.href = item.link;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "View Opportunity";
-
-      card.append(badges, title, desc, deadline, link);
-      resultsContainer.appendChild(card);
-    });
-  }
-
-  function quickFilter(cat) {
-    categorySelect.value = cat;
-    renderOpportunities();
-  }
-  window.quickFilter = quickFilter;
-
-  function applyFeaturedScholarshipDeadlines() {
-    document.querySelectorAll(".scholarship-card[data-deadline]").forEach(card => {
-      const deadlineStr = card.dataset.deadline;
-      if (isExpired(deadlineStr)) {
-        card.remove();
-        return;
-      }
-
-      const alertLabel = getAlertTierLabel(deadlineStr);
-      if (alertLabel && !card.querySelector(".alert-badge")) {
-        const badge = document.createElement("span");
-        badge.className = "alert-badge";
-        badge.style.marginTop = "8px";
-        badge.style.alignSelf = "flex-start";
-        badge.textContent = alertLabel;
-        const heading = card.querySelector("h3");
-        if (heading) heading.insertAdjacentElement("afterend", badge);
-      }
-    });
-  }
-
-  async function loadLiveDirectory() {
-    try {
-      const res = await fetch(GOOGLE_SHEET_URL);
-      if (!res.ok) throw new Error("Failed to fetch directory CSV");
-      const csvText = await res.text();
-      const sheetItems = convertSheetRows(csvText);
-
-      if (sheetItems.length) {
-        opportunities = sheetItems;
-        loadStatus.textContent = `Showing ${opportunities.length} verified active opportunities.`;
-      } else {
-        loadStatus.textContent = `Showing ${opportunities.length} featured starter opportunities.`;
-      }
-    } catch (err) {
-      loadStatus.textContent = `Showing ${opportunities.length} featured starter opportunities.`;
-    }
-    renderOpportunities();
-  }
-
-  // Deadline Alert Digest Form Handler (30 / 14 / 3-Day Engine)
-  const alertForm = document.getElementById("deadlineAlertForm");
-  const alertStatus = document.getElementById("alertStatus");
-
-  alertForm.addEventListener("submit", async event => {
-    event.preventDefault();
-
-    const email = clean(document.getElementById("alertEmail").value);
-    const whatsapp = clean(document.getElementById("alertWhatsapp").value);
-    const channel = document.getElementById("alertChannel").value;
-    const alertCategory = document.getElementById("alertCategory").value;
-    const alertCountry = document.getElementById("alertCountry").value;
-    const selectedWindows = Array.from(document.querySelectorAll('input[name="windows"]:checked')).map(el => el.value);
-
-    if (channel.includes("Email") && !email) {
-      alertStatus.textContent = "Please enter an email address for Email digests.";
-      return;
-    }
-    if (channel.includes("WhatsApp") && !whatsapp) {
-      alertStatus.textContent = "Please enter a WhatsApp number for WhatsApp digests.";
-      return;
-    }
-    if (!selectedWindows.length) {
-      alertStatus.textContent = "Select at least one reminder window (30-day, 14-day, or 3-day).";
-      return;
-    }
-
-    const payload = {
-      timestamp: new Date().toISOString(),
-      email,
-      whatsapp,
-      channel,
-      category: alertCategory,
-      country: alertCountry,
-      windows: selectedWindows.join(",")
-    };
-
-    try {
-      const existing = JSON.parse(localStorage.getItem("ob_deadline_alerts") || "[]");
-      existing.push(payload);
-      localStorage.setItem("ob_deadline_alerts", JSON.stringify(existing));
-    } catch {}
-
-    if (ALERT_WEBHOOK_URL) {
-      try {
-        await fetch(ALERT_WEBHOOK_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-      } catch {}
-    }
-
-    alertStatus.textContent = `Alerts activated (${selectedWindows.join(" / ")}) via ${channel} for ${alertCategory} (${alertCountry}).`;
-  });
-
-  searchInput.addEventListener("input", renderOpportunities);
-  searchButton.addEventListener("click", renderOpportunities);
-  categorySelect.addEventListener("change", renderOpportunities);
-  countrySelect.addEventListener("change", renderOpportunities);
-  resetFiltersButton.addEventListener("click", () => {
-    searchInput.value = "";
-    categorySelect.value = "";
-    countrySelect.value = "";
-    renderOpportunities();
-  });
-
-  applyFeaturedScholarshipDeadlines();
-  renderOpportunities();
-  loadLiveDirectory();
-</script>
-</body>
-</html>
